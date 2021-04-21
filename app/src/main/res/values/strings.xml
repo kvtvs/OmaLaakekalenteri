@@ -2,4 +2,6 @@
     <string name="app_name">OmaLaakekalenteri</string>
 
     <string name="button_new_medicine">Lisää Lääke</string>
+    <string name="kuukausi">Kuukausi</string>
+    <string name="toMainScreen">Lääkkeet</string>
 </resources>
