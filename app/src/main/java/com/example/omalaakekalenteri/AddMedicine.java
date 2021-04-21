@@ -25,7 +25,7 @@ public class AddMedicine extends AppCompatActivity  {
             public void onClick (View view){
                 String laakeNimi = medicineName.getText().toString();
                 Intent intent = new Intent();
-                intent.putExtra("Lääkkeen nimi", laakeNimi);
+                intent.putExtra("laakeNimi", laakeNimi);
                 setResult(RESULT_OK, intent);
                 finish();
             }
