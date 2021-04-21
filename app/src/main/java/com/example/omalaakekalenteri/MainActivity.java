@@ -2,6 +2,7 @@ package com.example.omalaakekalenteri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,5 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void addMedicine(View view) {
+        Intent intent = new Intent(this, AddMedicine.class);
+        startActivity(intent);
     }
 }

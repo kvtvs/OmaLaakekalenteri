@@ -34,6 +34,7 @@
         android:id="@+id/buttonNewMedicine"
         android:layout_width="147dp"
         android:layout_height="73dp"
+        android:onClick="addMedicine"
         android:text="@string/button_new_medicine"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
