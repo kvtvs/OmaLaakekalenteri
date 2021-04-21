@@ -2,6 +2,7 @@ package com.example.omalaakekalenteri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Medicine> medicines;
@@ -45,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
                 openActivityCalendar30();
             }
         });
+
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            getActivity().invalidateOptionsMenu();
+            if (resultCode == Activity.RESULT_OK) {
+
+                if (data != null) {
+                    Medicine med=new Medicine(data.getStringExtra("Lääkkeen nimi"));
+                    medicines.add(med);
+                    Medicine.add(med);
+                    Medicine.notifyDataSetChanged();
+                }
     }
 
     public void openActivityCalendar30(){
@@ -56,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddMedicine.class);
         startActivity(intent);
     }
+
 }
