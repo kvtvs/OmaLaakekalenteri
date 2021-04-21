@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             Intent intent = getIntent();
             if(bundle != null){
-                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"));
+                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
                 adapter.add(med);
                 adapter.notifyDataSetChanged();
             }
@@ -75,13 +75,14 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, intent);
 
             if(requestCode == 1 && resultCode == RESULT_OK){
-                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"));
+                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
                 adapter.add(med);
                 adapter.notifyDataSetChanged();
 
                 }
             }
         }
+
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
