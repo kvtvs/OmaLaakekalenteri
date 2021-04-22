@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         updateListView();
 
         Button addBtn = findViewById(R.id.buttonNewMedicine);
-        addBtn.setOnClickListener((new View.OnClickListener(){
+        addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
-                startActivityForResult(new Intent(MainActivity.this, AddMedicine.class), 1);
+                startActivity(new Intent(MainActivity.this, AddMedicine.class));
             }
-        }));
+        });
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
