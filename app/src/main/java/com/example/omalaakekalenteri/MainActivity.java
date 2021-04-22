@@ -28,10 +28,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         medicines = new ArrayList<>();
-        //medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
-        //medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
+        medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
+        medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
         updateListView();
 
+        Button addBtn = findViewById(R.id.buttonNewMedicine);
+        addBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                startActivity(new Intent(MainActivity.this, AddMedicine.class));
+            }
+        });
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
@@ -59,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
 
-        if(resultCode == RESULT_OK){
+        if(requestCode == 1 && resultCode == RESULT_OK){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
@@ -72,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(bundle != null){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
         }
