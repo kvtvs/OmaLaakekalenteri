@@ -28,11 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         medicines = new ArrayList<>();
-        //medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
-        //medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
+        medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
+        medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
         updateListView();
-
-
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
