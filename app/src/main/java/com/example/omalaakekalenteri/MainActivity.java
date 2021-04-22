@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == 1 && resultCode == RESULT_OK){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
