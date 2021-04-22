@@ -44,11 +44,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         calendarButton = (Button) findViewById(R.id.calanderButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivityCalendar30();
+            }
+        });
+
+        Button addBtn = findViewById(R.id.buttonNewMedicine);
+        addBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                startActivity(new Intent(MainActivity.this, AddMedicine.class));
             }
         });
     }
