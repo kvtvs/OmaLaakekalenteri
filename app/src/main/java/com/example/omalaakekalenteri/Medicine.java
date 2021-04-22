@@ -7,7 +7,7 @@ public class Medicine {
     private int timesADay;
     private int quantity;
 
-    public Medicine(String name,  String activeIngredient, int timesADay, int quantity, int dosageMg,) {
+    public Medicine(String name,  String activeIngredient, int timesADay, int quantity, int dosageMg) {
         this.name = name;
         this.dosageMg = dosageMg;
         this.activeIngredient = activeIngredient;

@@ -17,6 +17,7 @@ public class AddMedicine extends AppCompatActivity  {
         setContentView(R.layout.activity_add_medicine);
 
         Button tallenna = (Button) findViewById((R.id.buttonSave));
+        Button peruuta = (Button) findViewById(R.id.buttonCancel);
         EditText medicineName = (EditText) findViewById((R.id.editTextMedicineName));
         EditText activeIngredient = (EditText) findViewById(R.id.editTextActiveIngredient);
         EditText timesADay = (EditText) findViewById(R.id.editTextTimesADay);
@@ -39,6 +40,14 @@ public class AddMedicine extends AppCompatActivity  {
                 intent.putExtra("annostus", annostus);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        peruuta.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(AddMedicine.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

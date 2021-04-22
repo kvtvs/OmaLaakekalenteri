@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         medicines = new ArrayList<>();
-        medicines.add(new Medicine("Burana", 400, "ibuprofeiini", 3, 21));
-        medicines.add(new Medicine("Panadol", 1000, "parasetamoli", 2, 16));
+        medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
+        medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
         updateListView();
 
         Button addBtn = findViewById(R.id.buttonNewMedicine);
@@ -59,30 +59,29 @@ public class MainActivity extends AppCompatActivity {
                 openActivityCalendar30();
             }
         });
+    }
 
-        public void updateListView(){
-            Bundle bundle = getIntent().getExtras();
-            Intent intent = getIntent();
-            if(bundle != null){
-                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-                adapter.add(med);
-                adapter.notifyDataSetChanged();
-            }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            adapter.add(med);
+            adapter.notifyDataSetChanged();
+
         }
-
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-            super.onActivityResult(requestCode, resultCode, intent);
-
-            if(requestCode == 1 && resultCode == RESULT_OK){
-                Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-                adapter.add(med);
-                adapter.notifyDataSetChanged();
-
-                }
-            }
+    }
+    public void updateListView(){
+        Bundle bundle = getIntent().getExtras();
+        Intent intent = getIntent();
+        if(bundle != null){
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            adapter.add(med);
+            adapter.notifyDataSetChanged();
         }
-
+    }
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
