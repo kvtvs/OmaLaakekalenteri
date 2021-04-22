@@ -88,5 +88,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void addMedicine(View view) {
+        Intent intent = new Intent(this, AddMedicine.class);
+        startActivity(intent);
+    }
 
 }
