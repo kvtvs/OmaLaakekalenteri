@@ -34,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
         medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
         updateListView();
 
-        Button addBtn = findViewById(R.id.buttonNewMedicine);
-        addBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View view){
-                startActivity(new Intent(MainActivity.this, AddMedicine.class));
-            }
-        });
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
