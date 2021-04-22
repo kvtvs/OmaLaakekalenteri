@@ -32,14 +32,14 @@ public class AddMedicine extends AppCompatActivity  {
                 int kertaaPaivassa = Integer.parseInt(timesADay.getText().toString());
                 int maara = Integer.parseInt(quantity.getText().toString());
                 int annostus = Integer.parseInt(dosage.getText().toString());
-                Intent intent = new Intent();
+                Intent intent = new Intent(AddMedicine.this, MainActivity.class);
                 intent.putExtra("laakeNimi", laakeNimi);
                 intent.putExtra("vaikuttavaAine", vaikuttavaAine);
                 intent.putExtra("kertaaPaivassa", kertaaPaivassa);
                 intent.putExtra("maara", maara);
                 intent.putExtra("annostus", annostus);
                 setResult(RESULT_OK, intent);
-                finish();
+                startActivity(intent);
             }
         });
 
@@ -47,6 +47,7 @@ public class AddMedicine extends AppCompatActivity  {
             @Override
             public void onClick (View view){
                 Intent intent = new Intent(AddMedicine.this, MainActivity.class);
+                setResult(RESULT_CANCELED, intent);
                 startActivity(intent);
             }
         });

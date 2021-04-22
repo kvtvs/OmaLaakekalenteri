@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
         updateListView();
 
-
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
                 this, android.R.layout.simple_list_item_1, medicines
@@ -65,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent addMedicineActivity = new Intent(MainActivity.this, DisplayMedicine.class);
                 addMedicineActivity.putExtras(medicineInfo);
                 startActivity(addMedicineActivity);
+            }
+        });
+
+        Button addBtn = findViewById(R.id.buttonNewMedicine);
+        addBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                startActivity(new Intent(MainActivity.this, AddMedicine.class));
             }
         });
 
