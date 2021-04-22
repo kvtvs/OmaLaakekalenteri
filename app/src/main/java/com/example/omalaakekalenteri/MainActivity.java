@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
 
-        if(requestCode == 1 && resultCode == RESULT_OK){
+        if(/*requestCode == 1 &&*/ resultCode == RESULT_OK){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(bundle != null){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
         }
