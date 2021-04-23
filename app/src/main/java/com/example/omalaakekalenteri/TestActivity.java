@@ -24,7 +24,7 @@ public class TestActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("laakeNimi");
         String activeIngredient = intent.getStringExtra("vaikuttavaAine");
-        int timesADay = intent.getIntExtra("kertaaPäivässä", 0);
+        int timesADay = intent.getIntExtra("kertaaPaivassa", 0);
         int quantity = intent.getIntExtra("maara", 0);
         int dosage = intent.getIntExtra("annostus", 0);
 
