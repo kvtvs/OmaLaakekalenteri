@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OmaLaakekalenteri">
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".DisplayMedicineList"></activity>
         <activity android:name=".DisplayMedicine" />
         <activity android:name=".calendar30" />
         <activity android:name=".AddMedicine" />

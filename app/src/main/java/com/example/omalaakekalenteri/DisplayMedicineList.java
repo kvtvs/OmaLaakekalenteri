@@ -1,6 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,9 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class TestActivity extends AppCompatActivity {
+public class DisplayMedicineList extends AppCompatActivity {
     private final String TAG = "MED_";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,23 +18,27 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         Log.d("MED_", "Test");
 
+        ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
+        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
+                this, R.layout.medicine_item_layout, MedicineList.getInstance().getMedicines()
+        ));
 
         Intent intent = getIntent();
+
         String name = intent.getStringExtra("laakeNimi");
         String activeIngredient = intent.getStringExtra("vaikuttavaAine");
         int timesADay = intent.getIntExtra("kertaaPaivassa", 0);
         int quantity = intent.getIntExtra("maara", 0);
         int dosage = intent.getIntExtra("annostus", 0);
+        if (name != null){
+            Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage);
+            MedicineList.getInstance().addMedicine(medicine);
+        }
 
-        Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage);
-        MedicineList.getInstance().addMedicine(medicine);
         Log.d("MED_", "Test2");
 
 
-        ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
-        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, R.layout.medicine_item_layout, MedicineList.getInstance().getMedicines()
-        ));
+
 
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,7 +63,7 @@ public class TestActivity extends AppCompatActivity {
                 medicineInfo.putString("timesADay", timesADay);
                 medicineInfo.putString("quantity", quantity);
 
-                Intent addMedicineActivity = new Intent(TestActivity.this, DisplayMedicine.class);
+                Intent addMedicineActivity = new Intent(DisplayMedicineList.this, DisplayMedicine.class);
                 addMedicineActivity.putExtras(medicineInfo);
                 startActivity(addMedicineActivity);
             }

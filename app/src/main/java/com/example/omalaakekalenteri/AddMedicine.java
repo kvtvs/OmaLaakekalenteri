@@ -36,7 +36,7 @@ public class AddMedicine extends AppCompatActivity  {
                 int annostus = Integer.parseInt(dosage.getText().toString());
 
 
-                Intent intent = new Intent(AddMedicine.this, TestActivity.class);
+                Intent intent = new Intent(AddMedicine.this, DisplayMedicineList.class);
 
                 intent.putExtra("laakeNimi", laakeNimi);
                 intent.putExtra("vaikuttavaAine", vaikuttavaAine);
