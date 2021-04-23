@@ -23,12 +23,12 @@ public class DisplayMedicine extends AppCompatActivity {
         TextView textViewDosage = findViewById(R.id.textViewMedicineDosage);
         TextView textViewActiveIngredient = findViewById(R.id.textViewMedicineActiveIngredient);
         TextView textViewTimesADay = findViewById(R.id.textViewMedicineTimesADay);
-        TextView textViewQauntity = findViewById(R.id.textViewMedicineQuantity);
+        TextView textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
 
         textViewName.setText(name);
         textViewDosage.setText(dosage + " mg");
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
-        textViewQauntity.setText("Pillereitä jäljellä: " + quantity);
+        textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
     }
 }
