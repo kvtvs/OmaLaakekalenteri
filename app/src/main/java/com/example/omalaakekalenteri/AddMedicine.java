@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 public class AddMedicine extends AppCompatActivity  {
-
+    private final String TAG = "MED_";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,17 +29,25 @@ public class AddMedicine extends AppCompatActivity  {
             @Override
             public void onClick (View view){
                 String laakeNimi = medicineName.getText().toString();
+                Log.d(TAG, laakeNimi);
                 String vaikuttavaAine = activeIngredient.getText().toString();
                 int kertaaPaivassa = Integer.parseInt(timesADay.getText().toString());
                 int maara = Integer.parseInt(quantity.getText().toString());
                 int annostus = Integer.parseInt(dosage.getText().toString());
-                Intent intent = new Intent(AddMedicine.this, MainActivity.class);
+
+
+                Intent intent = new Intent(AddMedicine.this, TestActivity.class);
+
                 intent.putExtra("laakeNimi", laakeNimi);
                 intent.putExtra("vaikuttavaAine", vaikuttavaAine);
                 intent.putExtra("kertaaPaivassa", kertaaPaivassa);
                 intent.putExtra("maara", maara);
                 intent.putExtra("annostus", annostus);
+
+
                 setResult(RESULT_OK, intent);
+
+
                 startActivity(intent);
             }
         });
@@ -48,7 +57,7 @@ public class AddMedicine extends AppCompatActivity  {
             public void onClick (View view){
                 Intent intent = new Intent(AddMedicine.this, MainActivity.class);
                 setResult(RESULT_CANCELED, intent);
-                startActivity(intent);
+                finish();
             }
         });
 

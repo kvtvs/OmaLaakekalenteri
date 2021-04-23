@@ -1,5 +1,8 @@
 package com.example.omalaakekalenteri;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Medicine> medicines;
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Test objects
         medicines = new ArrayList<>();
         medicines.add(new Medicine("Burana", "ibuprofeiini", 3, 21, 400));
         medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
@@ -61,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button addBtn = findViewById(R.id.buttonNewMedicine);
+        addBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                startActivity(new Intent(MainActivity.this, AddMedicine.class));
+            }
+        });
+
         calendarButton = (Button) findViewById(R.id.calanderButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +89,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
 
-        if(/*requestCode == 1 &&*/ resultCode == RESULT_OK){
+        if(requestCode == 1 && resultCode == RESULT_OK){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
@@ -88,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(bundle != null){
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
             adapter.add(med);
             adapter.notifyDataSetChanged();
         }

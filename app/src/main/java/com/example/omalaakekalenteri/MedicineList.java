@@ -7,18 +7,23 @@ import java.util.List;
 
 public class MedicineList {
 
-    private static final MedicineList ourInstance = new MedicineList();
+    private static MedicineList ourInstance = new MedicineList();
     private List<Medicine> medicines;
 
     /** Creates new medicinelist singleton **/
 
     private MedicineList(){
         medicines = new ArrayList<>();
+        //test objects
+        medicines.add(new Medicine("Burana", "ibuprofeiini", 3, 21, 400));
+        medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
+
+
     }
 
     /** Add list of medicines to singleton **/
-    public void addMedicine(List<Medicine> medicines){
-        this.medicines = medicines;
+    public void addMedicine(Medicine medicine){
+        this.medicines.add(medicine);
     }
 
     /** Get the medicine list **/
@@ -31,6 +36,10 @@ public class MedicineList {
 
     public static MedicineList getInstance(){
         return ourInstance;
+    }
+
+    public Medicine getMedicine(int medicine){
+        return medicines.get(medicine);
     }
 
 
