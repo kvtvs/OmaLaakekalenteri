@@ -20,6 +20,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         Log.d("MED_", "Test");
 
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("laakeNimi");
         String activeIngredient = intent.getStringExtra("vaikuttavaAine");
@@ -71,5 +72,4 @@ public class TestActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddMedicine.class);
         startActivity(intent);
     }
-
 }

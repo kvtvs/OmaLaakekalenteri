@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -18,31 +19,25 @@ import java.util.List;
 import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Medicine> medicines;
-    ArrayAdapter adapter;
     private Button calendarButton;
+    private Button medicineListButton;
+    private TextView otsikko;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        medicines = new ArrayList<>();
-        medicines.add(new Medicine("Burana", "ibuprofeiini", 400, 3, 21));
-        medicines.add(new Medicine("Panadol", "parasetamoli", 1000, 2, 16));
-        updateListView();
+        otsikko = (TextView) findViewById(R.id.textViewHeader);
 
-        ListView listViewMedicines = findViewById(R.id.listViewMedicines);
-        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, android.R.layout.simple_list_item_1, medicines
-        ));
-
-        listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        medicineListButton = (Button) findViewById(R.id.buttonLaakelista);
+        medicineListButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-
+            public void onClick(View v){
+                openMedicineList();
             }
         });
+
 
         calendarButton = (Button) findViewById(R.id.calanderButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
@@ -54,36 +49,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        if(/*requestCode == 1 &&*/ resultCode == RESULT_OK){
-            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
-            adapter.add(med);
-            adapter.notifyDataSetChanged();
-
-        }
-    }
-    public void updateListView(){
-        Bundle bundle = getIntent().getExtras();
-        Intent intent = getIntent();
-        if(bundle != null){
-            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
-            medicines.add(med);
-            adapter.add(med);
-            adapter.notifyDataSetChanged();
-        }
-    }
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
         startActivity(intent);
     }
 
-    public void addMedicine(View view) {
-        Intent intent = new Intent(this, AddMedicine.class);
+    public void openMedicineList() {
+        Intent intent = new Intent(this, TestActivity.class);
         startActivity(intent);
     }
 
