@@ -1,9 +1,11 @@
 package com.example.omalaakekalenteri;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -19,40 +22,39 @@ import java.util.List;
 import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Medicine> medicines;
+    private TextView mTextViewTest;
     ArrayAdapter adapter;
     private Button calendarButton;
-
+    private final String TAG = "MED_";
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTextViewTest = findViewById(R.id.textViewTest);
 
-        //Test objects
-        medicines = new ArrayList<>();
-        medicines.add(new Medicine("Burana", "ibuprofeiini", 3, 21, 400));
-        medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
         updateListView();
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicines);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, android.R.layout.simple_list_item_1, medicines
+                this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
         ));
 
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                String TAG = "MED";
+
                 Log.d(TAG, "onItemClick(" + i + ")");
-                Log.d(TAG, medicines.get(i).toString());
+                Medicine medicine = MedicineList.getInstance().getMedicine(i);
+                Log.d(TAG, medicine.toString());
 
-                //TODO change into Singleton
 
-                String name = medicines.get(i).getName();
-                String dosage = Integer.toString(medicines.get(i).getDosageMg());
-                String activeIngredient = medicines.get(i).getActiveIngredient();
-                String timesADay = Integer.toString(medicines.get(i).getTimesADay());
-                String quantity = Integer.toString(medicines.get(i).getQuantity());
+
+                String name = medicine.getName();
+                String dosage = Integer.toString(medicine.getDosageMg());
+                String activeIngredient = medicine.getActiveIngredient();
+                String timesADay = Integer.toString(medicine.getTimesADay());
+                String quantity = Integer.toString(medicine.getQuantity());
 
                 Bundle medicineInfo = new Bundle();
                 medicineInfo.putString("name", name);
@@ -84,18 +86,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
-
+        Log.d(TAG, "onAcitivityResult() called");
         if(requestCode == 1 && resultCode == RESULT_OK){
+            String name = intent.getStringExtra("laakeNimi");
+            Log.d(TAG, name);
             Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
         }
     }
+     */
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult() called");
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                String test = data.getStringExtra("laakeNimi");
+                mTextViewTest.setText(test);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                mTextViewTest.setText("Nothing selected");
+            }
+        }
+    }
+
     public void updateListView(){
         Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
@@ -116,4 +139,43 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onCreate() called");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart() called");
+    }
 }
