@@ -22,7 +22,7 @@ import java.util.List;
 import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView mTextViewTest;
+
     ArrayAdapter adapter;
     private Button calendarButton;
     private final String TAG = "MED_";
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextViewTest = findViewById(R.id.textViewTest);
+
 
         updateListView();
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
      */
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+ */
 
     public void updateListView(){
         Bundle bundle = getIntent().getExtras();
