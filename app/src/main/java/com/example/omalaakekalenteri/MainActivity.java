@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,45 +40,15 @@ public class MainActivity extends AppCompatActivity {
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                String TAG = "MED";
-                Log.d(TAG, "onItemClick(" + i + ")");
-                Log.d(TAG, medicines.get(i).toString());
 
-                //TODO change into Singleton
-
-                String name = medicines.get(i).getName();
-                String dosage = Integer.toString(medicines.get(i).getDosageMg());
-                String activeIngredient = medicines.get(i).getActiveIngredient();
-                String timesADay = Integer.toString(medicines.get(i).getTimesADay());
-                String quantity = Integer.toString(medicines.get(i).getQuantity());
-
-                Bundle medicineInfo = new Bundle();
-                medicineInfo.putString("name", name);
-                medicineInfo.putString("dosage", dosage);
-                medicineInfo.putString("activeIngredient", activeIngredient);
-                medicineInfo.putString("timesADay", timesADay);
-                medicineInfo.putString("quantity", quantity);
-
-                Intent addMedicineActivity = new Intent(MainActivity.this, DisplayMedicine.class);
-                addMedicineActivity.putExtras(medicineInfo);
-                startActivity(addMedicineActivity);
             }
         });
-
 
         calendarButton = (Button) findViewById(R.id.calanderButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivityCalendar30();
-            }
-        });
-
-        Button addBtn = findViewById(R.id.buttonNewMedicine);
-        addBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View view){
-                startActivity(new Intent(MainActivity.this, AddMedicine.class));
             }
         });
     }
