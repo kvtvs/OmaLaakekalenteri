@@ -15,7 +15,7 @@ public class DisplayMedicineList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_display_medicine_list);
         Log.d("MED_", "Test");
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
@@ -55,6 +55,8 @@ public class DisplayMedicineList extends AppCompatActivity {
                 String activeIngredient = medicine.getActiveIngredient();
                 String timesADay = Integer.toString(medicine.getTimesADay());
                 String quantity = Integer.toString(medicine.getQuantity());
+                int medicineNumber = i;
+                Log.d(TAG, "" + i);
 
                 Bundle medicineInfo = new Bundle();
                 medicineInfo.putString("name", name);
@@ -62,6 +64,7 @@ public class DisplayMedicineList extends AppCompatActivity {
                 medicineInfo.putString("activeIngredient", activeIngredient);
                 medicineInfo.putString("timesADay", timesADay);
                 medicineInfo.putString("quantity", quantity);
+                medicineInfo.putInt("medicineNumber", medicineNumber);
 
                 Intent addMedicineActivity = new Intent(DisplayMedicineList.this, DisplayMedicine.class);
                 addMedicineActivity.putExtras(medicineInfo);
