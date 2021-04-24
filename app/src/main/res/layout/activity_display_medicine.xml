@@ -81,6 +81,7 @@
         android:id="@+id/buttonRemoveMedicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="removeMedicine"
         android:text="@string/button_medicine_remove"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
