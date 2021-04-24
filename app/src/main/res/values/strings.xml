@@ -12,4 +12,5 @@
     <string name="button_add_medicine">Lisää lääke</string>
     <string name="button_medicine_remove">Poista lääke</string>
     <string name="etusivulle">Etusivulle</string>
+    <string name="button_return_to_list">Lääkelista</string>
 </resources>
