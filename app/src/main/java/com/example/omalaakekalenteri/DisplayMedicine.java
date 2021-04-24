@@ -39,15 +39,21 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         TextView textViewTimesADay = findViewById(R.id.textViewMedicineTimesADay);
         TextView textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
         Button buttonRemoveMedicine = findViewById(R.id.buttonRemoveMedicine);
+        Button buttonReturnToList = findViewById(R.id.buttonReturnToList);
 
         textViewName.setText(name);
         textViewDosage.setText(dosage + " mg");
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
         textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
-        /*
 
-         */
+        buttonReturnToList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
+                startActivity(intent);
+            }
+        });
 
         buttonRemoveMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
