@@ -3,6 +3,7 @@ package com.example.omalaakekalenteri;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import java.time.Instant;
 
-public class DisplayMedicine extends AppCompatActivity {
+public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";
     private int medicineNumber;
 
@@ -44,16 +45,27 @@ public class DisplayMedicine extends AppCompatActivity {
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
         textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
+        /*
+
+         */
 
         buttonRemoveMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MedicineList.getInstance().getMedicines().remove(medicineNumber);
-                Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
-                startActivity(intent);
+                openDialog();
+
             }
         });
-
+    }
+    public void openDialog(){
+        RemoveMedicineDialog dialog = new RemoveMedicineDialog();
+        dialog.show(getSupportFragmentManager(), "remove medicine dialog");
     }
 
+    @Override
+    public void onYesClicked() {
+        MedicineList.getInstance().getMedicines().remove(medicineNumber);
+        Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
+        startActivity(intent);
+    }
 }
