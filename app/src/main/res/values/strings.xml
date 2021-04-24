@@ -10,4 +10,5 @@
     <string name="textview_medicine_info_times_a_day">Monta kertaa päivässä</string>
     <string name="textview_medicine_info_quantity">Annoksia</string>
     <string name="button_add_medicine">Lisää lääke</string>
+    <string name="etusivulle">Etusivulle</string>
 </resources>
