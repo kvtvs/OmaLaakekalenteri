@@ -37,29 +37,29 @@
 
     <EditText
         android:id="@+id/editTextTimesADay"
-        android:layout_width="62dp"
-        android:layout_height="39dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko2"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextQuantity"
-        android:layout_width="95dp"
-        android:layout_height="42dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_marginTop="11dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko3"
         app:layout_constraintVertical_bias="0.0" />
@@ -84,24 +84,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Kuinka monta kertaa päivässä lääke tulee ottaa?"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.268"
+        app:layout_constraintHorizontal_bias="0.308"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextActiveIngredient"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewOtsikko3"
-        android:layout_width="389dp"
-        android:layout_height="60dp"
+        android:layout_width="384dp"
+        android:layout_height="44dp"
         android:layout_marginTop="80dp"
         android:text="Vaikuttavan aineen määrä kerta-annoksessa? (Esim. Burana - 600mg)"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintHorizontal_bias="0.777"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko2"
         app:layout_constraintVertical_bias="0.0" />
@@ -111,13 +111,13 @@
         android:layout_width="348dp"
         android:layout_height="49dp"
         android:text="Paljonko lääkepakkauksessa on annoksia yhteensä? (Esim. kpl)"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko3"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintVertical_bias="0.246" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -134,14 +134,14 @@
 
     <EditText
         android:id="@+id/editTextDosage"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:layout_marginTop="11dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko4"
         app:layout_constraintVertical_bias="0.0" />
