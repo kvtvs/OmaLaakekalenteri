@@ -4,26 +4,49 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+
 
 
 public class AddMedicine extends AppCompatActivity  {
+
+    private Button tallenna;
+    private Button peruuta;
+    private EditText medicineName;
+    private EditText activeIngredient;
+    private EditText timesADay;
+    private EditText quantity;
+    private EditText dosage;
+
     private final String TAG = "MED_";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medicine);
 
-        Button tallenna = (Button) findViewById((R.id.buttonSave));
-        Button peruuta = (Button) findViewById(R.id.buttonCancel);
-        EditText medicineName = (EditText) findViewById((R.id.editTextMedicineName));
-        EditText activeIngredient = (EditText) findViewById(R.id.editTextActiveIngredient);
-        EditText timesADay = (EditText) findViewById(R.id.editTextTimesADay);
-        EditText quantity = (EditText) findViewById(R.id.editTextQuantity);
-        EditText dosage = (EditText) findViewById(R.id.editTextDosage);
+        tallenna = (Button) findViewById((R.id.buttonSave));
+        peruuta = (Button) findViewById(R.id.buttonCancel);
+        medicineName = (EditText) findViewById((R.id.editTextMedicineName));
+        activeIngredient = (EditText) findViewById(R.id.editTextActiveIngredient);
+        timesADay = (EditText) findViewById(R.id.editTextTimesADay);
+        quantity = (EditText) findViewById(R.id.editTextQuantity);
+        dosage = (EditText) findViewById(R.id.editTextDosage);
+
+        tallenna.setEnabled(false);
+
+        medicineName.addTextChangedListener(textWatcher);
+        activeIngredient.addTextChangedListener(textWatcher);
+        timesADay.addTextChangedListener(textWatcher);
+        quantity.addTextChangedListener(textWatcher);
+        dosage.addTextChangedListener(textWatcher);
 
         tallenna.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -37,17 +60,12 @@ public class AddMedicine extends AppCompatActivity  {
 
 
                 Intent intent = new Intent(AddMedicine.this, DisplayMedicineList.class);
-
                 intent.putExtra("laakeNimi", laakeNimi);
                 intent.putExtra("vaikuttavaAine", vaikuttavaAine);
                 intent.putExtra("kertaaPaivassa", kertaaPaivassa);
                 intent.putExtra("maara", maara);
                 intent.putExtra("annostus", annostus);
-
-
                 setResult(RESULT_OK, intent);
-
-
                 startActivity(intent);
             }
         });
@@ -63,6 +81,33 @@ public class AddMedicine extends AppCompatActivity  {
 
 
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after){
+
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count){
+            String laakeNimi = medicineName.getText().toString();
+            String vaikuttavaAine = activeIngredient.getText().toString();
+            String kertaaPaivassaString = timesADay.getText().toString();
+            String maaraString = quantity.getText().toString();
+            String annostusString = dosage.getText().toString();
+
+            if(!laakeNimi.isEmpty() && !vaikuttavaAine.isEmpty() && !kertaaPaivassaString.isEmpty() && !maaraString.isEmpty() && !annostusString.isEmpty()){
+                tallenna.setEnabled(true);
+            } else {
+                tallenna.setEnabled(false);
+            }
+        }
+        @Override
+        public void afterTextChanged(Editable s){
+
+        }
+    };
+
+
 
 }
 
