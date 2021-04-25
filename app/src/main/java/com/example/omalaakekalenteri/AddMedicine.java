@@ -13,9 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-
-
 public class AddMedicine extends AppCompatActivity  {
 
     private Button tallenna;
