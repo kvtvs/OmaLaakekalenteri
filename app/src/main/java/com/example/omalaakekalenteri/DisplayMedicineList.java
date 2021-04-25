@@ -8,15 +8,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class DisplayMedicineList extends AppCompatActivity {
     private final String TAG = "MED_";
+    private Button backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine_list);
         Log.d("MED_", "Test");
+
+        backBtn = (Button) findViewById(R.id.buttonBack);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMainActivity();
+            }
+        });
 
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
@@ -38,8 +48,6 @@ public class DisplayMedicineList extends AppCompatActivity {
         Log.d("MED_", "Test2");
 
 
-
-
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
@@ -47,8 +55,6 @@ public class DisplayMedicineList extends AppCompatActivity {
                 Log.d(TAG, "onItemClick(" + i + ")");
                 Medicine medicine = MedicineList.getInstance().getMedicine(i);
                 Log.d(TAG, medicine.toString());
-
-
 
                 String name = medicine.getName();
                 String dosage = Integer.toString(medicine.getDosageMg());
@@ -77,4 +83,10 @@ public class DisplayMedicineList extends AppCompatActivity {
         Intent intent = new Intent(this, AddMedicine.class);
         startActivity(intent);
     }
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
 }
