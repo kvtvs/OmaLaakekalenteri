@@ -1,27 +1,36 @@
 package com.example.omalaakekalenteri;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
+
 import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private Button calendarButton;
-    private Button medicineListButton;
-    private TextView otsikko;
+    private ArrayList<Medicine> medicines;
+    ArrayAdapter adapter;
+    private Button calendarButton, medicineListButton, notificationTestButton;
+    private NotificationManagerCompat notificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        otsikko = (TextView) findViewById(R.id.textViewHeader);
+        //otsikko = (TextView) findViewById(R.id.textViewHeader);
 
         medicineListButton = (Button) findViewById(R.id.buttonLaakelista);
         medicineListButton.setOnClickListener(new View.OnClickListener(){
@@ -39,9 +48,33 @@ public class MainActivity extends AppCompatActivity {
                 openActivityCalendar30();
             }
         });
+
+
+        notificationManager = NotificationManagerCompat.from(this);
+
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            adapter.add(med);
+            adapter.notifyDataSetChanged();
+
+        }
+    }
+    public void updateListView(){
+        Bundle bundle = getIntent().getExtras();
+        Intent intent = getIntent();
+        if(bundle != null){
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            adapter.add(med);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
@@ -53,4 +86,29 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void notifications(View v) {
+
+        Intent activityIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity (this, 0, activityIntent, 0);
+
+        String message = "Oletteko ottaneet lääkkeenne?";
+
+        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+        broadcastIntent.putExtra("laakeMessage", message);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new NotificationCompat.Builder(this, Notifications.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_omalaakekalenteri)
+                .setContentTitle("OmaLääkekalenteri")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .addAction(R.mipmap.ic_launcher, "Otettu", actionIntent)
+                .addAction(R.mipmap.ic_launcher, "Ei ole otettu", actionIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
 }

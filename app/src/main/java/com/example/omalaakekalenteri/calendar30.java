@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+/**
+ * @author Mikko Räikkönen
+ *
+ */
+
 public class calendar30 extends AppCompatActivity {
 
     private Button mainScreen;
