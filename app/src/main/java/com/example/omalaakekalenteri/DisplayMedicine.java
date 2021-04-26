@@ -76,12 +76,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     @Override
     public void onYesClicked() {
         MedicineList.getInstance().getMedicines().remove(medicineNumber);
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(MedicineList.getInstance().getMedicines());
         editor.putString(LIST, json);
         editor.apply();
+
         Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
         startActivity(intent);
     }
