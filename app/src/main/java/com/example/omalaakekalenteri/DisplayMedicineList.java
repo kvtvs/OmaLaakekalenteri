@@ -3,6 +3,7 @@ package com.example.omalaakekalenteri;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,14 +12,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class DisplayMedicineList extends AppCompatActivity {
     private final String TAG = "MED_";
     private Button backBtn;
+    public final static String SHARED_PREFS = "sharedPrefs";
+    public final static String LIST = "list";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine_list);
-        Log.d("MED_", "Test");
+
+
+        loadData();
+
 
         backBtn = (Button) findViewById(R.id.buttonBack);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +57,7 @@ public class DisplayMedicineList extends AppCompatActivity {
             MedicineList.getInstance().addMedicine(medicine);
         }
 
-        Log.d("MED_", "Test2");
+
 
 
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,5 +100,30 @@ public class DisplayMedicineList extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(MedicineList.getInstance().getMedicines());
+        editor.putString(LIST, json);
+        editor.apply();
+    }
 
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(LIST, null);
+        Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
+        MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
+        if (MedicineList.getInstance().getMedicines() == null) {
+            Log.d(TAG, "empty");
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        saveData();
+    }
 }

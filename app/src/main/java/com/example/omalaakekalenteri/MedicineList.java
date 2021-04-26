@@ -42,5 +42,7 @@ public class MedicineList {
         return medicines.get(medicine);
     }
 
-
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
+    }
 }
