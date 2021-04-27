@@ -61,6 +61,7 @@ public class DisplayMedicineList extends AppCompatActivity {
 
 
 
+
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {

@@ -1,10 +1,11 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,12 +15,15 @@ import java.util.Locale;
 public class DisplayDate extends AppCompatActivity {
     private int year, month, day;
     private TextView textViewDate;
+    private EditText diary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_date);
         textViewDate = findViewById(R.id.textViewDate);
         Date c = Calendar.getInstance().getTime();
+        diary = findViewById(R.id.editTextDiary);
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String formattedDate = df.format(c);
         String[] split = formattedDate.split("-");
