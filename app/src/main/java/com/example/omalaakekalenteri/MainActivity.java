@@ -1,28 +1,30 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import android.app.Notification;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import static android.app.PendingIntent.getActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
-    private Button calendarButton, medicineListButton, notificationTestButton, takenButton, notTakenButton;
-    private NotificationManagerCompat notificationManager;
+    private Button calendarButton, medicineListButton, takenButton, notTakenButton, clockButton;
+    private TextView clockTextView, otsikko;
 
 
     @Override
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //otsikko = (TextView) findViewById(R.id.textViewHeader);
+
+        clockTextView = (TextView) findViewById(R.id.clockTextView) ;
+        otsikko = (TextView) findViewById(R.id.textViewHeader);
 
         medicineListButton = (Button) findViewById(R.id.buttonLaakelista);
         medicineListButton.setOnClickListener(new View.OnClickListener(){
@@ -45,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openActivityCalendar30();
             }
         });
+
 
         takenButton = (Button) findViewById(R.id.takenButton);
         takenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cancelAlarm();
+                //poistaa hälyytyksen ja miinustaa lääke määrästä
             }
         });
 
@@ -61,13 +67,18 @@ public class MainActivity extends AppCompatActivity {
         notTakenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //ei miinusta lääkemäärästä
             }
         });
 
-
-        notificationManager = NotificationManagerCompat.from(this);
-
+        clockButton = (Button) findViewById(R.id.clockButton);
+        clockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+            }
+        });
     }
 
 
@@ -102,29 +113,43 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void notifications(View v) {
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
 
-        Intent activityIntent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity (this, 0, activityIntent, 0);
+        updateClockText(c);
+        startAlarm(c);
+    }
 
-        String message = "Oletteko ottaneet lääkkeenne?";
+    private void updateClockText(Calendar c){
+        String clockText = "Muistutus asetettu: ";
+        clockText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
 
-        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
-        broadcastIntent.putExtra("laakeMessage", message);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        clockTextView.setText(clockText);
+    }
 
-        Notification notification = new NotificationCompat.Builder(this, Notifications.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_omalaakekalenteri)
-                .setContentTitle("OmaLääkekalenteri")
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-                .addAction(R.mipmap.ic_launcher, "Otettu", actionIntent)
-                .addAction(R.mipmap.ic_launcher, "Ei ole otettu", actionIntent)
-                .build();
+    private void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
 
-        notificationManager.notify(1, notification);
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE,1); //tässä jos hälytys laitetaan mennneeseen kellonaikaan se siirtääsen seuraavalle päivälle
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        }
+    }
+
+    private void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        alarmManager.cancel(pendingIntent);
     }
 }
