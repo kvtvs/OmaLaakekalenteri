@@ -46,6 +46,7 @@ public class calendar30 extends AppCompatActivity {
                 chosenMonth = month + 1;
                 chosenDay = dayOfMonth;
                 Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
+
             }
         });
         selectDay = findViewById(R.id.buttonSelectDay);
