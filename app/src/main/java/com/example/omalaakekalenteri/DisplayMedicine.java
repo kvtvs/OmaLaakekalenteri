@@ -34,20 +34,24 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         medicineNumber = bundle.getInt("medicineNumber");
 
         warningText = (TextView) findViewById(R.id.textViewWarning);
-        warningText.setEnabled(false);
+        warningText.setVisibility(View.INVISIBLE);
+
         TextView textViewName = findViewById(R.id.textViewMedicineName);
         TextView textViewDosage = findViewById(R.id.textViewMedicineDosage);
         TextView textViewActiveIngredient = findViewById(R.id.textViewMedicineActiveIngredient);
         TextView textViewTimesADay = findViewById(R.id.textViewMedicineTimesADay);
-        textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
         Button buttonRemoveMedicine = findViewById(R.id.buttonRemoveMedicine);
         Button buttonReturnToList = findViewById(R.id.buttonReturnToList);
+
+        textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
 
         textViewName.setText(name);
         textViewDosage.setText(dosage + " mg");
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
-        textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
+
+
+
 
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +90,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
         startActivity(intent);
     }
+
+
 
 
 }

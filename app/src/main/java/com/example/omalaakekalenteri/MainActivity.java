@@ -1,9 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -11,12 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.ArrayList;
-
-import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Medicine> medicines;
@@ -95,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
         startActivity(intent);
+        calendarButton = (Button) findViewById(R.id.calanderButton);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void openMedicineList() {
