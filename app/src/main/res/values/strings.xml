@@ -15,4 +15,5 @@
     <string name="etusivulle">Etusivulle</string>
     <string name="button_return_to_list">Lääkelista</string>
     <string name="button_select_day">Avaa päivä</string>
+    <string name="textview_date">Päivämäärä</string>
 </resources>

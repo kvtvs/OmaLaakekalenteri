@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openActivityCalendar30();
             }
         });
 
