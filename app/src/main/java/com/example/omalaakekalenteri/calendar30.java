@@ -16,8 +16,9 @@ import android.widget.CalendarView;
 
 public class calendar30 extends AppCompatActivity {
 
-    private Button mainScreen;
+    private Button mainScreen, selectDay;
     private CalendarView calendar30;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,15 @@ public class calendar30 extends AppCompatActivity {
         setContentView(R.layout.activity_calendar30);
 
         mainScreen = (Button) findViewById(R.id.mainScreenButton);
+
         mainScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMainActivity();
             }
         });
+
+        selectDay = findViewById(R.id.buttonSelectDay);
 
         calendar30 = (CalendarView) findViewById(R.id.calendar30);
         calendar30.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
