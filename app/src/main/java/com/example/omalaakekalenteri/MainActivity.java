@@ -21,7 +21,7 @@ import static android.app.PendingIntent.getActivity;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
-    private Button calendarButton, medicineListButton, notificationTestButton;
+    private Button calendarButton, medicineListButton, notificationTestButton, takenButton, notTakenButton;
     private NotificationManagerCompat notificationManager;
 
 
@@ -45,7 +45,23 @@ public class MainActivity extends AppCompatActivity {
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivityCalendar30();
+
+            }
+        });
+
+        takenButton = (Button) findViewById(R.id.takenButton);
+        takenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        notTakenButton = (Button) findViewById(R.id.notTakenButton);
+        notTakenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
