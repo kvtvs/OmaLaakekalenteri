@@ -49,8 +49,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         textViewDosage.setText(dosage + " mg");
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
+        textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
 
-
+        int i = Integer.parseInt(quantity);
+        if (i == 0){
+            warningText.setVisibility(View.VISIBLE);
+        } else {
+            warningText.setVisibility(View.INVISIBLE);
+        }
 
 
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
