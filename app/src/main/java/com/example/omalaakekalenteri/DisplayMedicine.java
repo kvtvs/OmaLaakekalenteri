@@ -1,28 +1,24 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
-
-import java.time.Instant;
 
 public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";
     private int medicineNumber;
     public final static String SHARED_PREFS = "sharedPrefs";
     public final static String LIST = "list";
+    private TextView warningText;
+    private TextView textViewQuantity;
+    private String quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +30,34 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         String dosage = bundle.getString("dosage");
         String activeIngredient = bundle.getString("activeIngredient");
         String timesADay = bundle.getString("timesADay");
-        String quantity = bundle.getString("quantity");
+        quantity = bundle.getString("quantity");
         medicineNumber = bundle.getInt("medicineNumber");
 
+        warningText = (TextView) findViewById(R.id.textViewWarning);
+        warningText.setVisibility(View.INVISIBLE);
 
         TextView textViewName = findViewById(R.id.textViewMedicineName);
         TextView textViewDosage = findViewById(R.id.textViewMedicineDosage);
         TextView textViewActiveIngredient = findViewById(R.id.textViewMedicineActiveIngredient);
         TextView textViewTimesADay = findViewById(R.id.textViewMedicineTimesADay);
-        TextView textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
         Button buttonRemoveMedicine = findViewById(R.id.buttonRemoveMedicine);
         Button buttonReturnToList = findViewById(R.id.buttonReturnToList);
+
+        textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
 
         textViewName.setText(name);
         textViewDosage.setText(dosage + " mg");
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
         textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
+
+        int i = Integer.parseInt(quantity);
+        if (i == 0){
+            warningText.setVisibility(View.VISIBLE);
+        } else {
+            warningText.setVisibility(View.INVISIBLE);
+        }
+
 
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +75,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
             }
         });
     }
+
+
     public void openDialog(){
         RemoveMedicineDialog dialog = new RemoveMedicineDialog();
         dialog.show(getSupportFragmentManager(), "remove medicine dialog");
@@ -87,4 +96,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
         startActivity(intent);
     }
+
+
+
+
 }
