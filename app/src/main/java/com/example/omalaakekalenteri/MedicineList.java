@@ -3,7 +3,7 @@ package com.example.omalaakekalenteri;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Class that contains singleton list of foods **/
+/** Class that contains singleton list of medicine **/
 
 public class MedicineList {
 

@@ -29,10 +29,10 @@ public class DisplayMedicineList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine_list);
 
-
+        /** Loads all the data that has been put to medicine list **/
         loadData();
 
-
+        /** Button and method for going back to MainActivity **/
         backBtn = (Button) findViewById(R.id.buttonBack);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +41,13 @@ public class DisplayMedicineList extends AppCompatActivity {
             }
         });
 
+        /** The list for medicine **/
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
                 this, R.layout.medicine_item_layout, MedicineList.getInstance().getMedicines()
         ));
 
+        /** Fetches the data from Intent that is created in AddMedicine.class **/
         Intent intent = getIntent();
 
         String name = intent.getStringExtra("laakeNimi");
@@ -55,6 +57,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         int dosage = intent.getIntExtra("annostus", 0);
         int pieces = intent.getIntExtra("kappaleMaara", 0);
         if (name != null){
+            /** Adds the new medicine to the list **/
             Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage, pieces);
             MedicineList.getInstance().addMedicine(medicine);
         }

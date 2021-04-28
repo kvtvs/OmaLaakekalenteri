@@ -37,6 +37,8 @@ public class AddMedicine extends AppCompatActivity  {
         dosage = (EditText) findViewById(R.id.editTextDosage);
         pieces = (EditText) findViewById(R.id.editTextPieces);
 
+
+    /** Setting save-button to false-state (non-clickable) and adding text listener to text fields that check that all field will have content **/
         tallenna.setEnabled(false);
 
         medicineName.addTextChangedListener(textWatcher);
@@ -46,9 +48,11 @@ public class AddMedicine extends AppCompatActivity  {
         dosage.addTextChangedListener(textWatcher);
         pieces.addTextChangedListener(textWatcher);
 
+        /** When all the fields have user input, the user can press save-button **/
         tallenna.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
+                /** Turning all the inputs to strings **/
                 String laakeNimi = medicineName.getText().toString();
                 Log.d(TAG, laakeNimi);
                 String vaikuttavaAine = activeIngredient.getText().toString();
@@ -59,17 +63,20 @@ public class AddMedicine extends AppCompatActivity  {
 
 
                 Intent intent = new Intent(AddMedicine.this, DisplayMedicineList.class);
+                /** All info will be put to intent **/
                 intent.putExtra("laakeNimi", laakeNimi);
                 intent.putExtra("vaikuttavaAine", vaikuttavaAine);
                 intent.putExtra("kertaaPaivassa", kertaaPaivassa);
                 intent.putExtra("maara", maara);
                 intent.putExtra("annostus", annostus);
                 intent.putExtra("kappaleMaara", kappaleMaara);
+                /** When button is pressed, it will send result-info to onActivityResult in Mainactivity and start new Activity **/
                 setResult(RESULT_OK, intent);
                 startActivity(intent);
             }
         });
 
+        /** If Cancel-button is pressed, it will just go back to medicine list and it sends result-info to onActivityResult in MainActivity **/
         peruuta.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
@@ -82,6 +89,8 @@ public class AddMedicine extends AppCompatActivity  {
 
     }
 
+
+    /** Creating TextWatcher that checks that all fields have content **/
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after){
@@ -97,8 +106,11 @@ public class AddMedicine extends AppCompatActivity  {
             String kappaleString = pieces.getText().toString();
 
             if(!laakeNimi.isEmpty() && !vaikuttavaAine.isEmpty() && !kertaaPaivassaString.isEmpty() && !maaraString.isEmpty() && !annostusString.isEmpty() && !kappaleString.isEmpty()){
+                /** Check that all fields are not empty **/
+                /** If all fields have content, set save button state to true (clickable) **/
                 tallenna.setEnabled(true);
             } else {
+                /** If all fields are not filled, the button stays in false state **/
                 tallenna.setEnabled(false);
             }
         }
