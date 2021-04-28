@@ -70,7 +70,7 @@ public class DisplayDate extends AppCompatActivity {
             if (chosenDate.compareTo(resultDate) > 0){
                 Log.d(TAG, "After "  + MedicineList.getInstance().getMedicines().get(i).getName() + " ends");
 
-            } else if (chosenDate.compareTo(resultDate) < 0){
+            } else if (chosenDate.compareTo(resultDate) < 0 && chosenDate.compareTo(medDate) > 0){
                 Log.d(TAG, "Before "  + MedicineList.getInstance().getMedicines().get(i).getName() + " ends");
                 medicines.add(MedicineList.getInstance().getMedicines().get(i));
             } else {
