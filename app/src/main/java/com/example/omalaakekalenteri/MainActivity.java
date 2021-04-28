@@ -1,7 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import java.io.Serializable;
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if(requestCode == 1 && resultCode == RESULT_OK){
-            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0),intent.getIntExtra("kappaleMaara", 0));
             adapter.add(med);
             adapter.notifyDataSetChanged();
 
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
         if(bundle != null){
-            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0));
+            Medicine med = new Medicine(intent.getStringExtra("laakeNimi"), intent.getStringExtra("vaikuttavaAine"), intent.getIntExtra("kertaaPaivassa", 0), intent.getIntExtra("maara", 0), intent.getIntExtra("annostus", 0),intent.getIntExtra("kappaleMaara", 0));
             adapter.add(med);
             adapter.notifyDataSetChanged();
         }
