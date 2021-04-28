@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,35 +14,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:maxLength="50"
-        android:hint="Nimi"
+        android:hint="@string/nimi"
         android:inputType="textPersonName"
+        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextActiveIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Vaikuttava aine"
+        android:hint="@string/vaikuttava_aine"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/editTextMedicineName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextTimesADay"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,13 +51,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextDosage"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginTop="11dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
@@ -69,7 +72,7 @@
         android:id="@+id/textViewOtsikko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anna lääkkeen tiedot"
+        android:text="@string/anna_l_kkeen_tiedot"
         android:textColor="#30C88F"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Kuinka monta kertaa päivässä lääke tulee ottaa?"
+        android:text="@string/kuinka_monta_kertaa_p_iv_ss_l_ke_tulee_ottaa"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,49 +98,49 @@
 
     <TextView
         android:id="@+id/textViewOtsikko3"
-        android:layout_width="384dp"
+        android:layout_width="340dp"
         android:layout_height="44dp"
-        android:layout_marginTop="80dp"
-        android:text="Vaikuttavan aineen määrä kerta-annoksessa? (Esim. Burana - 600mg)"
+        android:layout_marginTop="51dp"
+        android:text="@string/vaikuttavan_aineen_m_r_kerta_annoksessa_esim_burana_600mg"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko2"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewOtsikko4"
-        android:layout_width="348dp"
-        android:layout_height="49dp"
-        android:text="Paljonko lääkepakkauksessa on annoksia yhteensä? (Esim. kpl)"
+        android:layout_width="340dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="51dp"
+        android:text="@string/paljonko_l_kepakkauksessa_on_annoksia_yhteens_esim_kpl"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko3"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tallenna"
+        android:text="@string/tallenna"
         app:backgroundTint="#34CFA0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.783"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <EditText
         android:id="@+id/editTextQuantity"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginTop="11dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,20 +148,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peruuta"
+        android:text="@string/peruuta"
         app:backgroundTint="#125AD5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -172,5 +176,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
+
+    <TextView
+        android:id="@+id/textViewOtsikko5"
+        android:layout_width="340dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="54dp"
+        android:text="@string/paljonko_l_kett_tulee_ottaa_kerta_annoksena_esim_kpl_m_r"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextPieces"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOtsikko5"
+        app:layout_constraintVertical_bias="0.0"
+        android:importantForAutofill="no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

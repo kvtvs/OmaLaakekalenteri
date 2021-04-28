@@ -16,5 +16,14 @@
     <string name="button_return_to_list">Lääkelista</string>
     <string name="button_select_day">Avaa päivä</string>
     <string name="textview_date">Päivämäärä</string>
+    <string name="anna_l_kkeen_tiedot">Anna lääkkeen tiedot</string>
+    <string name="tallenna">Tallenna</string>
+    <string name="peruuta">Peruuta</string>
+    <string name="nimi">Nimi</string>
+    <string name="vaikuttava_aine">Vaikuttava aine</string>
+    <string name="kuinka_monta_kertaa_p_iv_ss_l_ke_tulee_ottaa">Kuinka monta kertaa päivässä lääke tulee ottaa?</string>
+    <string name="vaikuttavan_aineen_m_r_kerta_annoksessa_esim_burana_600mg">Vaikuttavan aineen määrä kerta-annoksessa? (Esim. Burana - 600mg)</string>
+    <string name="paljonko_l_kepakkauksessa_on_annoksia_yhteens_esim_kpl">Paljonko lääkepakkauksessa on annoksia yhteensä? (Esim. kpl)</string>
+    <string name="paljonko_l_kett_tulee_ottaa_kerta_annoksena_esim_kpl_m_r">Paljonko lääkettä tulee ottaa kerta-annoksena? (Esim. kpl-määrä)</string>
 
 </resources>

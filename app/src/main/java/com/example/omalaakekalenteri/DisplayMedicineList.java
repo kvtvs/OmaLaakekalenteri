@@ -53,8 +53,9 @@ public class DisplayMedicineList extends AppCompatActivity {
         int timesADay = intent.getIntExtra("kertaaPaivassa", 0);
         int quantity = intent.getIntExtra("maara", 0);
         int dosage = intent.getIntExtra("annostus", 0);
+        int pieces = intent.getIntExtra("kappaleMaara", 0);
         if (name != null){
-            Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage);
+            Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage, pieces);
             MedicineList.getInstance().addMedicine(medicine);
         }
 
@@ -75,6 +76,7 @@ public class DisplayMedicineList extends AppCompatActivity {
                 String activeIngredient = medicine.getActiveIngredient();
                 String timesADay = Integer.toString(medicine.getTimesADay());
                 String quantity = Integer.toString(medicine.getQuantity());
+                String pieces = Integer.toString(medicine.getPiecesAtOnce());
                 int medicineNumber = i;
                 Log.d(TAG, "" + i);
 
@@ -85,6 +87,7 @@ public class DisplayMedicineList extends AppCompatActivity {
                 medicineInfo.putString("timesADay", timesADay);
                 medicineInfo.putString("quantity", quantity);
                 medicineInfo.putInt("medicineNumber", medicineNumber);
+                medicineInfo.putString("pieces", pieces);
 
                 Intent addMedicineActivity = new Intent(DisplayMedicineList.this, DisplayMedicine.class);
                 addMedicineActivity.putExtras(medicineInfo);

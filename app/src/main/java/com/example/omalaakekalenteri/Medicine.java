@@ -1,9 +1,7 @@
 package com.example.omalaakekalenteri;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class Medicine {
     private String name;
@@ -12,14 +10,16 @@ public class Medicine {
     private int timesADay;
     private int quantity;
     private int howManyDays;
+    private int piecesAtOnce;
     private final Date date;
 
-    public Medicine(String name,  String activeIngredient, int timesADay, int quantity, int dosageMg) {
+    public Medicine(String name,  String activeIngredient, int timesADay, int quantity, int dosageMg, int piecesAtOnce) {
         this.name = name;
         this.dosageMg = dosageMg;
         this.activeIngredient = activeIngredient;
         this.timesADay = timesADay;
         this.quantity = quantity;
+        this.piecesAtOnce = piecesAtOnce;
         howManyDays = quantity / timesADay;
         date = Calendar.getInstance().getTime();
 
@@ -48,6 +48,8 @@ public class Medicine {
     public int getHowManyDays(){
         return howManyDays;
     }
+
+    public int getPiecesAtOnce(){return piecesAtOnce;}
 
     public Date getDate(){
         return date;
