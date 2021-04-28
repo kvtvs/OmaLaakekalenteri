@@ -17,7 +17,7 @@ public class MedicineList {
         //test objects
         medicines.add(new Medicine("Burana", "ibuprofeiini", 3, 21, 400));
         medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000));
-
+        medicines.add(new Medicine("TestMed", "test", 1, 2, 10));
 
     }
 

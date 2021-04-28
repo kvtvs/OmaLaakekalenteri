@@ -28,6 +28,7 @@ public class calendar30 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar30);
 
+
         mainScreen = (Button) findViewById(R.id.mainScreenButton);
 
         mainScreen.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +46,7 @@ public class calendar30 extends AppCompatActivity {
                 chosenYear = year;
                 chosenMonth = month + 1;
                 chosenDay = dayOfMonth;
-                Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
+
 
             }
         });
@@ -67,6 +68,7 @@ public class calendar30 extends AppCompatActivity {
 
 
         Bundle bundle = new Bundle();
+
         bundle.putInt("year", chosenYear);
         bundle.putInt("month", chosenMonth);
         bundle.putInt("day", chosenDay);
