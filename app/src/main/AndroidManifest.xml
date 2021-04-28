@@ -3,15 +3,15 @@
     package="com.example.omalaakekalenteri">
 
     <application
-
         android:allowBackup="true"
+
+
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OmaLaakekalenteri">
-        <activity android:name=".DisplayDate"></activity>
-        <activity android:name=".DisplayMedicineList" />
+        <activity android:name=".DisplayMedicineList"></activity>
         <activity android:name=".DisplayMedicine" />
         <activity android:name=".calendar30" />
         <activity android:name=".AddMedicine" />
@@ -22,8 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver android:name=".NotificationReceiver" />
+        <receiver android:name=".AlertReceiver"/>
     </application>
 
 </manifest>
