@@ -29,7 +29,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine_list);
 
-        saveData();
+
         loadData();
 
 

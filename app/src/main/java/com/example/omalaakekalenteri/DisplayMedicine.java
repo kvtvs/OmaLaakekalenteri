@@ -7,10 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";
@@ -24,10 +29,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     private Button buttoniHaveEatenMedicine;
     private Counter laskuri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine);
+
+        saveData();
+        loadData();
 
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("name");
@@ -82,7 +91,9 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     public void buttonPressed(View v) {
         laskuri.laskeUusi();
 
-        MedicineList.getInstance().getMedicines().get(medicineNumber).setQuantity(MedicineList.getInstance().getMedicines().get(medicineNumber).getQuantity() - 1);
+        MedicineList.getInstance().getMedicines().get(medicineNumber).setQuantity(MedicineList.getInstance().getMedicines().get(medicineNumber).getQuantity()
+                - MedicineList.getInstance().getMedicines().get(medicineNumber).getPiecesAtOnce());
+
         int b = MedicineList.getInstance().getMedicines().get(medicineNumber).getQuantity();
         Log.d(TAG, ""+b);
         textViewQuantity.setText("Pillereitä jäljellä: " + laskuri.getUusi());
@@ -93,6 +104,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
             warningText.setVisibility(View.INVISIBLE);
             buttoniHaveEatenMedicine.setEnabled(true);
         }
+        saveData();
     }
 
     public void openDialog(){
@@ -104,14 +116,39 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     public void onYesClicked() {
         MedicineList.getInstance().getMedicines().remove(medicineNumber);
 
+        saveData();
+
+        Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
+        startActivity(intent);
+    }
+
+    private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(MedicineList.getInstance().getMedicines());
+        Log.d(TAG, json);
         editor.putString(LIST, json);
         editor.apply();
+    }
 
-        Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
-        startActivity(intent);
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(LIST, null);
+        Log.d(TAG, json);
+        Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
+        MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
+
+        if (MedicineList.getInstance().getMedicines() == null) {
+            Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "empty");
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
     }
 }
