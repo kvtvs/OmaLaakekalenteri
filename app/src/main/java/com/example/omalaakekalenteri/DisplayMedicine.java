@@ -61,14 +61,6 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
         textViewPieces.setText("Lääkkeiden määrä kerta-annoksessa: " + pieces);
 
-        int i = Integer.parseInt(quantity);
-        if (i == 0){
-            warningText.setVisibility(View.VISIBLE);
-            buttoniHaveEatenMedicine.setEnabled(false);
-        } else {
-            warningText.setVisibility(View.INVISIBLE);
-            buttoniHaveEatenMedicine.setEnabled(true);
-        }
 
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
             @Override
