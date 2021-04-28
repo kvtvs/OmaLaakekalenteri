@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
     private Button calendarButton, medicineListButton, notificationTestButton, takenButton, notTakenButton;
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //otsikko = (TextView) findViewById(R.id.textViewHeader);
 
         medicineListButton = (Button) findViewById(R.id.buttonLaakelista);
         medicineListButton.setOnClickListener(new View.OnClickListener(){
@@ -91,9 +90,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
-
         startActivity(intent);
+        calendarButton = (Button) findViewById(R.id.calanderButton);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     public void openMedicineList() {
@@ -101,5 +105,29 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         startActivity(intent);
     }
 
+    public void notifications(View v) {
 
+        Intent activityIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity (this, 0, activityIntent, 0);
+
+        String message = "Oletteko ottaneet lääkkeenne?";
+
+        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+        broadcastIntent.putExtra("laakeMessage", message);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new NotificationCompat.Builder(this, Notifications.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_omalaakekalenteri)
+                .setContentTitle("OmaLääkekalenteri")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .addAction(R.mipmap.ic_launcher, "Otettu", actionIntent)
+                .addAction(R.mipmap.ic_launcher, "Ei ole otettu", actionIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
 }

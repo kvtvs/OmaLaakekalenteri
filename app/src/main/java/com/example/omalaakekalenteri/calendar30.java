@@ -72,7 +72,7 @@ public class calendar30 extends AppCompatActivity {
         bundle.putInt("year", chosenYear);
         bundle.putInt("month", chosenMonth);
         bundle.putInt("day", chosenDay);
-        Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
+        //Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
         intent.putExtras(bundle);
         startActivity(intent);
     }

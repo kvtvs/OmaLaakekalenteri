@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class DisplayDate extends AppCompatActivity {
     private int year, month, day, todayDay, todayMonth, todayYear;
-    private TextView textViewDate, textViewName;
+    private TextView textViewDate;
     private Date chosenDate;
     private final String TAG = "MED_";
     private ArrayList<Medicine> medicines;
@@ -38,7 +38,7 @@ public class DisplayDate extends AppCompatActivity {
         todayMonth = Integer.valueOf(split[1]);
         todayYear = Integer.valueOf(split[2]);
 
-        Log.d("MED_", formattedDate);
+        //Log.d("MED_", formattedDate);
         Bundle bundle = getIntent().getExtras();
         year = bundle.getInt("year", 0);
         month = bundle.getInt("month", 0);
@@ -46,35 +46,39 @@ public class DisplayDate extends AppCompatActivity {
         String chosenDateString = day + "-"+ month + "-" + year;
 
         SimpleDateFormat chosenDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+        if (chosenDateString.equals("0-0-0")){
+            chosenDateString = todayDay + "-" + todayMonth + "-" + todayYear;
+            //Log.d(TAG, chosenDateString);
+        }
         try {
             chosenDate = chosenDateFormat.parse(chosenDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+
         medicines = new ArrayList<>();
 
         for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
             Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String chosenDateInString = sdf.format(chosenDate);
             String beforeInString = sdf.format(medDate);
-            Log.d(TAG, "TestBefore: " + beforeInString);
+            Log.d(TAG, chosenDateInString);
+            Log.d(TAG, beforeInString);
             sdf.format(medDate);
             Calendar cal = Calendar.getInstance();
             cal.setTime(medDate);
             cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
             Date resultDate = new Date(cal.getTimeInMillis());
             String dateInString = sdf.format(resultDate);
-            Log.d(TAG,"TestAfter: " + dateInString);
-            if (chosenDate.compareTo(resultDate) > 0){
-                Log.d(TAG, "After "  + MedicineList.getInstance().getMedicines().get(i).getName() + " ends");
 
-            } else if (chosenDate.compareTo(resultDate) < 0 && chosenDate.compareTo(medDate) > 0){
-                Log.d(TAG, "Before "  + MedicineList.getInstance().getMedicines().get(i).getName() + " ends");
+
+            if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
                 medicines.add(MedicineList.getInstance().getMedicines().get(i));
-            } else {
-                Log.d(TAG, "Same "  + MedicineList.getInstance().getMedicines().get(i).getName());
+            }
+            if (chosenDateInString.equals(beforeInString)){
+                medicines.add(MedicineList.getInstance().getMedicines().get(i));
             }
         }
         ListView listViewMedicines = findViewById(R.id.listViewDaysMedicines);
