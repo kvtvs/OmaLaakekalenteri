@@ -1,6 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import android.app.Notification;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
@@ -15,16 +14,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
