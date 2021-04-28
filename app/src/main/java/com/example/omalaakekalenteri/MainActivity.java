@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
     private Button calendarButton, medicineListButton, notificationTestButton, takenButton, notTakenButton;
@@ -90,14 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityCalendar30(){
         Intent intent = new Intent(this, calendar30.class);
-        startActivity(intent);
-        calendarButton = (Button) findViewById(R.id.calanderButton);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        /*if (!MedicineList.getInstance().getMedicines().isEmpty()){
+            intent.putExtra("list", (Serializable) MedicineList.getInstance().getMedicines());
+        }
+         */
 
-            }
-        });
+        startActivity(intent);
+
     }
 
     public void openMedicineList() {

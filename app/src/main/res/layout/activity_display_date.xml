@@ -6,14 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".DisplayDate">
 
+    <ListView
+        android:id="@+id/listViewDaysMedicines"
+        android:layout_width="411dp"
+        android:layout_height="550dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textViewDate"
-        android:layout_width="307dp"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/textview_date"
-        android:textSize="30sp"
-        android:gravity="center"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
