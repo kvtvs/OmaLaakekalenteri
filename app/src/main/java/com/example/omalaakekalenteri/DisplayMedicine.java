@@ -48,6 +48,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         Button buttonRemoveMedicine = findViewById(R.id.buttonRemoveMedicine);
         Button buttonReturnToList = findViewById(R.id.buttonReturnToList);
         buttoniHaveEatenMedicine = findViewById(R.id.buttoniHaveEatenMedicine);
+        buttoniHaveEatenMedicine.setEnabled(true);
         textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
 
         textViewName.setText(name);
@@ -60,8 +61,10 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         int i = Integer.parseInt(quantity);
         if (i == 0){
             warningText.setVisibility(View.VISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(false);
         } else {
             warningText.setVisibility(View.INVISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(true);
         }
 
 
@@ -84,14 +87,13 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     }
 
 
-    public String buttonPressed(View v) {
+    public void buttonPressed(View v) {
         int kokonaisMaara = Integer.parseInt(quantity);
         int kappaleMaara = Integer.parseInt(pieces);
         if (v.getId() == R.id.buttoniHaveEatenMedicine) {
             kokonaisMaara -= kappaleMaara;
             textViewQuantity.setText("Pillereitä jäljellä: " + kokonaisMaara);
         }
-        return Integer.toString(kokonaisMaara);
     }
 
 
