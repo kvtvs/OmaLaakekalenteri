@@ -84,13 +84,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     }
 
 
-    public void buttonPressed(View v){
+    public String buttonPressed(View v) {
         int kokonaisMaara = Integer.parseInt(quantity);
         int kappaleMaara = Integer.parseInt(pieces);
-        if(v.getId() == R.id.buttoniHaveEatenMedicine){
+        if (v.getId() == R.id.buttoniHaveEatenMedicine) {
             kokonaisMaara -= kappaleMaara;
             textViewQuantity.setText("Pillereitä jäljellä: " + kokonaisMaara);
         }
+        return Integer.toString(kokonaisMaara);
     }
 
 
