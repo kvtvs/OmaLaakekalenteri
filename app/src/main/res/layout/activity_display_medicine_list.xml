@@ -34,7 +34,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="11dp"
-        android:text="Etusivulle"
+        android:text="@string/etusivulle"
         app:backgroundTint="#34CFA0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -29,5 +29,13 @@
     <string name="l_kkeiden_m_r_kerta_annoksessa">Lääkkeiden määrä kerta-annoksessa:</string>
     <string name="olen_ottanut_l_keannoksen">Olen ottanut lääkeannoksen</string>
     <string name="t_m_l_ke_on_loppunut">Tämä lääke on loppunut!</string>
+    <string name="etusivulle">Etusivulle</string>
+    <string name="kalenteri">Kalenteri</string>
+    <string name="l_kelista">Lääkelista</string>
+    <string name="tervetuloa_k_ytt_m_n_omal_kekalenteria">Tervetuloa käyttämään OmaLääkekalenteria!</string>
+    <string name="otettu">Otettu</string>
+    <string name="ei_otettu">ei otettu</string>
+    <string name="kello">Kello</string>
+    <string name="muistutusta_ei_ole_asetettu">Muistutusta ei ole asetettu!</string>
 
 </resources>
