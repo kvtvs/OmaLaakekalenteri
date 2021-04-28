@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.CalendarView;
 
 /**
- * @author Mikko Räikkönen
- *
+ * @author Mikko Räikkönen, Mikael Alakari
+ * Activity class with CalendarView
  */
 
 public class calendar30 extends AppCompatActivity {
@@ -42,7 +42,7 @@ public class calendar30 extends AppCompatActivity {
         calendar30.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                //etsii painetun päivän datan
+                //selected date
                 chosenYear = year;
                 chosenMonth = month + 1;
                 chosenDay = dayOfMonth;
@@ -59,10 +59,17 @@ public class calendar30 extends AppCompatActivity {
         });
     }
 
+    /**
+     * Opens MainActivity activity
+     */
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Opens DisplayDate activity and sends chosen date
+     */
     public void openDisplayDate(){
         Intent intent = new Intent(this, DisplayDate.class);
 
@@ -72,7 +79,7 @@ public class calendar30 extends AppCompatActivity {
         bundle.putInt("year", chosenYear);
         bundle.putInt("month", chosenMonth);
         bundle.putInt("day", chosenDay);
-        //Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
+
         intent.putExtras(bundle);
         startActivity(intent);
     }

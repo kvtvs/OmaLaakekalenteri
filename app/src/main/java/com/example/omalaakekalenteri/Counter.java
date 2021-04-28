@@ -1,5 +1,9 @@
 package com.example.omalaakekalenteri;
 
+/**
+ * @author Kata Sara-aho
+ *
+ */
 public class Counter {
     private int startNum;
     private int step;

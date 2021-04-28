@@ -3,7 +3,10 @@ package com.example.omalaakekalenteri;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Class that contains singleton list of medicine **/
+/**
+ * @author Kata Sara-aho, Mikael Alakari
+ * Class that contains singleton list of medicine
+  */
 
 public class MedicineList {
 
@@ -38,10 +41,19 @@ public class MedicineList {
         return ourInstance;
     }
 
+    /**
+     *
+     * @param medicine
+     * @return medicine from ArrayList
+     */
     public Medicine getMedicine(int medicine){
         return medicines.get(medicine);
     }
 
+    /**
+     * sets the ArrayList with a list of Medicines
+     * @param medicines
+     */
     public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
     }

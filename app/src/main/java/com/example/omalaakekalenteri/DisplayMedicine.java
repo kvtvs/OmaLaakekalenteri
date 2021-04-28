@@ -17,6 +17,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * @author Mikael Alakari, Kata Sara-aho
+ * Displays Medicine Info on activity_display_medicine
+ */
 public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";
     private int medicineNumber;
@@ -88,6 +92,10 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         });
     }
 
+    /**
+     *Decreases the quantity of a medicine when pressing button
+     * @param v
+     */
     public void buttonPressed(View v) {
         laskuri.laskeUusi();
 
@@ -107,11 +115,17 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         saveData();
     }
 
+    /**
+     * Opens Dialog for removing Medicine from MedicineList
+     */
     public void openDialog(){
         RemoveMedicineDialog dialog = new RemoveMedicineDialog();
         dialog.show(getSupportFragmentManager(), "remove medicine dialog");
     }
 
+    /**
+     * Removes medicine from MedicineList
+     */
     @Override
     public void onYesClicked() {
         MedicineList.getInstance().getMedicines().remove(medicineNumber);
@@ -121,7 +135,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
         startActivity(intent);
     }
-
+    //SharedPrefs save
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -131,7 +145,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         editor.putString(LIST, json);
         editor.apply();
     }
-
+    // SharedPrefs load
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();

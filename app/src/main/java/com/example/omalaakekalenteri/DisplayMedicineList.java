@@ -19,6 +19,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Activity that Displays an ArrayList of Medicines in a ListView
+ * @author Mikael Alakari
+ */
 public class DisplayMedicineList extends AppCompatActivity {
     private final String TAG = "MED_";
     private Button backBtn;
@@ -99,15 +103,23 @@ public class DisplayMedicineList extends AppCompatActivity {
         });
     }
 
+    /**
+     * opens AddMedicine activity
+     * @param view
+     */
     public void addMedicine(View view) {
         Intent intent = new Intent(this, AddMedicine.class);
         startActivity(intent);
     }
+
+    /**
+     * Opens MainActivity activity
+     */
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
+    //sharedprefs save
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -116,7 +128,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         editor.putString(LIST, json);
         editor.apply();
     }
-
+    //sharedprefs load
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();

@@ -12,6 +12,9 @@ import androidx.core.app.NotificationManagerCompat;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Kata Sara-aho, Mikko Räikkönen, Mikael Alakari
+ */
 public class MainActivity extends AppCompatActivity implements Serializable {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;

@@ -17,6 +17,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * @author Mikael Alakari
+ * From CalendarView Displays Chosen Day's Medicine info in listView
+ */
 public class DisplayDate extends AppCompatActivity {
     private int year, month, day, todayDay, todayMonth, todayYear;
     private TextView textViewDate;
@@ -38,7 +42,7 @@ public class DisplayDate extends AppCompatActivity {
         todayMonth = Integer.valueOf(split[1]);
         todayYear = Integer.valueOf(split[2]);
 
-        //Log.d("MED_", formattedDate);
+        //Get intent from calendar30
         Bundle bundle = getIntent().getExtras();
         year = bundle.getInt("year", 0);
         month = bundle.getInt("month", 0);
@@ -48,7 +52,7 @@ public class DisplayDate extends AppCompatActivity {
         SimpleDateFormat chosenDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         if (chosenDateString.equals("0-0-0")){
             chosenDateString = todayDay + "-" + todayMonth + "-" + todayYear;
-            //Log.d(TAG, chosenDateString);
+
         }
         try {
             chosenDate = chosenDateFormat.parse(chosenDateString);
@@ -58,7 +62,7 @@ public class DisplayDate extends AppCompatActivity {
 
 
         medicines = new ArrayList<>();
-
+        //going through the list and checking the dates
         for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
             Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -71,9 +75,9 @@ public class DisplayDate extends AppCompatActivity {
             cal.setTime(medDate);
             cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
             Date resultDate = new Date(cal.getTimeInMillis());
-            String dateInString = sdf.format(resultDate);
 
 
+            //adding medicines to listview list
             if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
                 medicines.add(MedicineList.getInstance().getMedicines().get(i));
             }
