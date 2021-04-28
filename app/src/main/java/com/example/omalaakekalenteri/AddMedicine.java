@@ -1,7 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddMedicine extends AppCompatActivity  {
 
@@ -20,6 +20,7 @@ public class AddMedicine extends AppCompatActivity  {
     private EditText timesADay;
     private EditText quantity;
     private EditText dosage;
+    private EditText pieces;
 
     private final String TAG = "MED_";
     @Override
@@ -34,6 +35,7 @@ public class AddMedicine extends AppCompatActivity  {
         timesADay = (EditText) findViewById(R.id.editTextTimesADay);
         quantity = (EditText) findViewById(R.id.editTextQuantity);
         dosage = (EditText) findViewById(R.id.editTextDosage);
+        pieces = (EditText) findViewById(R.id.editTextPieces);
 
         tallenna.setEnabled(false);
 
@@ -42,6 +44,7 @@ public class AddMedicine extends AppCompatActivity  {
         timesADay.addTextChangedListener(textWatcher);
         quantity.addTextChangedListener(textWatcher);
         dosage.addTextChangedListener(textWatcher);
+        pieces.addTextChangedListener(textWatcher);
 
         tallenna.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,6 +55,7 @@ public class AddMedicine extends AppCompatActivity  {
                 int kertaaPaivassa = Integer.parseInt(timesADay.getText().toString());
                 int maara = Integer.parseInt(quantity.getText().toString());
                 int annostus = Integer.parseInt(dosage.getText().toString());
+                int kappaleMaara = Integer.parseInt(pieces.getText().toString());
 
 
                 Intent intent = new Intent(AddMedicine.this, DisplayMedicineList.class);
@@ -60,6 +64,7 @@ public class AddMedicine extends AppCompatActivity  {
                 intent.putExtra("kertaaPaivassa", kertaaPaivassa);
                 intent.putExtra("maara", maara);
                 intent.putExtra("annostus", annostus);
+                intent.putExtra("kappaleMaara", kappaleMaara);
                 setResult(RESULT_OK, intent);
                 startActivity(intent);
             }
@@ -89,8 +94,9 @@ public class AddMedicine extends AppCompatActivity  {
             String kertaaPaivassaString = timesADay.getText().toString();
             String maaraString = quantity.getText().toString();
             String annostusString = dosage.getText().toString();
+            String kappaleString = pieces.getText().toString();
 
-            if(!laakeNimi.isEmpty() && !vaikuttavaAine.isEmpty() && !kertaaPaivassaString.isEmpty() && !maaraString.isEmpty() && !annostusString.isEmpty()){
+            if(!laakeNimi.isEmpty() && !vaikuttavaAine.isEmpty() && !kertaaPaivassaString.isEmpty() && !maaraString.isEmpty() && !annostusString.isEmpty() && !kappaleString.isEmpty()){
                 tallenna.setEnabled(true);
             } else {
                 tallenna.setEnabled(false);

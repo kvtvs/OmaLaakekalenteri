@@ -19,6 +19,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     private TextView warningText;
     private TextView textViewQuantity;
     private String quantity;
+    private String pieces;
+    private Button buttoniHaveEatenMedicine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         String timesADay = bundle.getString("timesADay");
         quantity = bundle.getString("quantity");
         medicineNumber = bundle.getInt("medicineNumber");
+        pieces = bundle.getString("pieces");
+
 
         warningText = (TextView) findViewById(R.id.textViewWarning);
         warningText.setVisibility(View.INVISIBLE);
@@ -40,9 +44,11 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         TextView textViewDosage = findViewById(R.id.textViewMedicineDosage);
         TextView textViewActiveIngredient = findViewById(R.id.textViewMedicineActiveIngredient);
         TextView textViewTimesADay = findViewById(R.id.textViewMedicineTimesADay);
+        TextView textViewPieces = findViewById(R.id.textViewPiecesAtOnce);
         Button buttonRemoveMedicine = findViewById(R.id.buttonRemoveMedicine);
         Button buttonReturnToList = findViewById(R.id.buttonReturnToList);
-
+        buttoniHaveEatenMedicine = findViewById(R.id.buttoniHaveEatenMedicine);
+        buttoniHaveEatenMedicine.setEnabled(true);
         textViewQuantity = findViewById(R.id.textViewMedicineQuantity);
 
         textViewName.setText(name);
@@ -50,13 +56,17 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         textViewActiveIngredient.setText(activeIngredient);
         textViewTimesADay.setText("Monta kertaa päivässä: " + timesADay);
         textViewQuantity.setText("Pillereitä jäljellä: " + quantity);
+        textViewPieces.setText("Lääkkeiden määrä kerta-annoksessa: " + pieces);
 
         int i = Integer.parseInt(quantity);
         if (i == 0){
             warningText.setVisibility(View.VISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(false);
         } else {
             warningText.setVisibility(View.INVISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(true);
         }
+
 
 
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +84,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
 
             }
         });
+    }
+
+
+    public void buttonPressed(View v) {
+        int kokonaisMaara = Integer.parseInt(quantity);
+        int kappaleMaara = Integer.parseInt(pieces);
+        kokonaisMaara -= kappaleMaara;
+        textViewQuantity.setText("Pillereitä jäljellä: " + kokonaisMaara);
     }
 
 

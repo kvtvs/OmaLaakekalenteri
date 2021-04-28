@@ -93,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="0.653" />
 
     <Button
         android:id="@+id/buttonReturnToList"
@@ -113,14 +113,39 @@
         android:layout_width="187dp"
         android:layout_height="55dp"
         android:gravity="center"
-        android:text="Lääkkeesi ovat loppuneet! Uusi reseptisi."
+        android:text="@string/l_kkeesi_ovat_loppuneet"
         android:textColor="#9E0404"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.594" />
+
+    <TextView
+        android:id="@+id/textViewPiecesAtOnce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/l_kkeiden_m_r_kerta_annoksessa"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttoniHaveEatenMedicine"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:onClick="buttonPressed"
+        android:text="@string/olen_ottanut_l_keannoksen"
+        app:backgroundTint="#34CFA0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.453" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
