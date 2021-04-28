@@ -3,18 +3,22 @@ package com.example.omalaakekalenteri;
 public class Counter {
     private int startNum;
     private int step;
+    int minNum;
 
-    public Counter(int startNum, int step){
+    public Counter(int startNum, int step, int minNum){
         this.startNum = startNum;
         this.step = step;
+        this.minNum = minNum;
     }
 
     public void laskeUusi(){
-        this.startNum -= this.step;
+        if(this.startNum >= this.minNum + this.step){
+            this.startNum -= this.step;
+        }
     }
 
-    public String getUusi(){
-        return Integer.toString(this.startNum);
+    public int getUusi(){
+        return this.startNum;
     }
 
 }

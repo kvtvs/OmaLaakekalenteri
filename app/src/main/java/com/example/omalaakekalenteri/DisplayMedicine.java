@@ -37,7 +37,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         medicineNumber = bundle.getInt("medicineNumber");
         pieces = bundle.getString("pieces");
 
-        laskuri = new Counter(Integer.parseInt(quantity), Integer.parseInt(pieces));
+        laskuri = new Counter(Integer.parseInt(quantity), Integer.parseInt(pieces), 0);
 
 
         warningText = (TextView) findViewById(R.id.textViewWarning);
@@ -92,6 +92,14 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
 
     public void buttonPressed(View v) {
         laskuri.laskeUusi();
+        textViewQuantity.setText("Pillereitä jäljellä: " + laskuri.getUusi());
+        if ( laskuri.getUusi() == 0){
+            warningText.setVisibility(View.VISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(false);
+        } else {
+            warningText.setVisibility(View.INVISIBLE);
+            buttoniHaveEatenMedicine.setEnabled(true);
+        }
     }
 
 
