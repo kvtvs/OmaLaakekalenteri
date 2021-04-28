@@ -3,6 +3,7 @@ package com.example.omalaakekalenteri;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,7 +40,6 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
 
         laskuri = new Counter(Integer.parseInt(quantity), Integer.parseInt(pieces), 0);
 
-
         warningText = (TextView) findViewById(R.id.textViewWarning);
         warningText.setVisibility(View.INVISIBLE);
 
@@ -70,8 +70,6 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
             buttoniHaveEatenMedicine.setEnabled(true);
         }
 
-
-
         buttonReturnToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,9 +87,12 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         });
     }
 
-
     public void buttonPressed(View v) {
         laskuri.laskeUusi();
+
+        MedicineList.getInstance().getMedicines().get(medicineNumber).setQuantity(MedicineList.getInstance().getMedicines().get(medicineNumber).getQuantity() - 1);
+        int b = MedicineList.getInstance().getMedicines().get(medicineNumber).getQuantity();
+        Log.d(TAG, ""+b);
         textViewQuantity.setText("Pillereitä jäljellä: " + laskuri.getUusi());
         if ( laskuri.getUusi() == 0){
             warningText.setVisibility(View.VISIBLE);
@@ -101,7 +102,6 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
             buttoniHaveEatenMedicine.setEnabled(true);
         }
     }
-
 
     public void openDialog(){
         RemoveMedicineDialog dialog = new RemoveMedicineDialog();
@@ -122,8 +122,4 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         Intent intent = new Intent(DisplayMedicine.this, DisplayMedicineList.class);
         startActivity(intent);
     }
-
-
-
-
 }
