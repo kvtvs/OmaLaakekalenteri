@@ -21,6 +21,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     private String quantity;
     private String pieces;
     private Button buttoniHaveEatenMedicine;
+    private Counter laskuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         quantity = bundle.getString("quantity");
         medicineNumber = bundle.getInt("medicineNumber");
         pieces = bundle.getString("pieces");
+
+        laskuri = new Counter(Integer.parseInt(quantity), Integer.parseInt(pieces));
 
 
         warningText = (TextView) findViewById(R.id.textViewWarning);
@@ -88,10 +91,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
 
 
     public void buttonPressed(View v) {
-        int kokonaisMaara = Integer.parseInt(quantity);
-        int kappaleMaara = Integer.parseInt(pieces);
-        kokonaisMaara -= kappaleMaara;
-        textViewQuantity.setText("Pillereitä jäljellä: " + kokonaisMaara);
+        laskuri.laskeUusi();
     }
 
 
