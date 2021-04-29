@@ -1,8 +1,12 @@
-package com.example.omalaakekalenteri;
+ package com.example.omalaakekalenteri;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -116,7 +121,28 @@ public class MainActivity extends AppCompatActivity /*implements Serializable*/ 
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
         TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
         clockTextView.setText("Muistutus on asetettu " + hourOfDay + ":" + minute);
+
+        startAlarm(c);
+    }
+
+    private void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent alertIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE, 1);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), alertIntent);
+        }
+
     }
 }

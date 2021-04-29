@@ -22,6 +22,20 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
+        android:id="@+id/clockButton"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="26dp"
+        android:text="@string/muistutuksen_asetus"
+        app:backgroundTint="#34CFA0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calanderButton"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <Button
         android:id="@+id/buttonLaakelista"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -48,25 +62,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.246" />
 
-    <Button
-        android:id="@+id/clockButton"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginRight="163dp"
-        android:text="@string/aseta_muistutus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calanderButton" />
-
     <TextView
         android:id="@+id/clockTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="51dp"
         android:text="@string/muistutusta_ei_ole_asetettu"
         app:layout_constraintBottom_toTopOf="@+id/buttonLaakelista"
         app:layout_constraintEnd_toEndOf="parent"

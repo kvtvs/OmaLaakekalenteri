@@ -39,6 +39,6 @@
     <string name="textview_date_med_name">Nimi</string>
     <string name="textview_date_med_times">Monta kertaa päivässä</string>
     <string name="p_iv_n_kokonaisl_kem_r">Päivän kokonaislääkemäärä</string>
-    <string name="aseta_muistutus">Aseta muistutus</string>
+    <string name="muistutuksen_asetus">Muistutuksen asetus</string>
 
 </resources>
