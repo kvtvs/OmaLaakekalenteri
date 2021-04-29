@@ -34,7 +34,7 @@ public class Medicine {
         this.timesADay = timesADay;
         this.quantity = quantity;
         this.piecesAtOnce = piecesAtOnce;
-        howManyDays = quantity / timesADay;
+        howManyDays = this.quantity / this.timesADay;
         date = Calendar.getInstance().getTime();
 
     }
@@ -93,6 +93,10 @@ public class Medicine {
      */
     public int getPiecesAtOnce(){return piecesAtOnce;}
 
+    /**
+     *
+     * @return the date when the medicine was created
+     */
     public Date getDate(){
         return date;
     }
