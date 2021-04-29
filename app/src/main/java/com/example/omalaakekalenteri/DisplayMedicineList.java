@@ -35,6 +35,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         setContentView(R.layout.activity_display_medicine_list);
 
         /** Loads all the data that has been put to medicine list **/
+        saveData();
         loadData();
 
         /** Button and method for going back to MainActivity **/
@@ -48,12 +49,9 @@ public class DisplayMedicineList extends AppCompatActivity {
 
         /** The list for medicine **/
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
-        if (MedicineList.getInstance().getMedicines() != null){
-            listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                    this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
-            ));
-
-        }
+        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
+                this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
+        ));
 
 
         /** Fetches the data from Intent that is created in AddMedicine.class **/
