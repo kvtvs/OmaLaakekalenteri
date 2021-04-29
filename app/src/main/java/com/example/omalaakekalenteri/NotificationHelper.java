@@ -39,7 +39,7 @@ public class NotificationHelper extends ContextWrapper {
 
     public NotificationCompat.Builder getChannelNotification() {
 
-        Intent activityIntent = new Intent (this, MainActivity.class);
+        Intent activityIntent = new Intent (this, DisplayMedicineList.class);
         PendingIntent moveIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
