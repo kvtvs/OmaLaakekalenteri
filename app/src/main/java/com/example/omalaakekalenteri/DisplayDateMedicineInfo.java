@@ -1,9 +1,9 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DisplayDateMedicineInfo extends AppCompatActivity {
     private TextView textViewDateMedName, textViewDateMedTimes;
@@ -20,6 +20,6 @@ public class DisplayDateMedicineInfo extends AppCompatActivity {
         String timesADay = bundle.getString("timesADay");
 
         textViewDateMedName.setText(name + " " + dosage + "mg");
-        textViewDateMedTimes.setText("Monta kertaa päivässä: " + timesADay);
+        textViewDateMedTimes.setText("Päivän kokonaislääkemäärä: " + timesADay);
     }
 }

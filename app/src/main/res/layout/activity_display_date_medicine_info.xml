@@ -12,7 +12,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="@string/textview_date_med_times"
+        android:text="@string/p_iv_n_kokonaisl_kem_r"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
