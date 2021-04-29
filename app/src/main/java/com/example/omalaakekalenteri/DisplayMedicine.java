@@ -56,6 +56,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         warningText = (TextView) findViewById(R.id.textViewWarning);
         warningText.setVisibility(View.INVISIBLE);
 
+
         TextView textViewName = findViewById(R.id.textViewMedicineName);
         TextView textViewDosage = findViewById(R.id.textViewMedicineDosage);
         TextView textViewActiveIngredient = findViewById(R.id.textViewMedicineActiveIngredient);
