@@ -12,8 +12,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
+ * Class for taking user inputs and sends the data into Singleton list.
  * @author Kata Sara-aho, Mikael Alakari
- * Class for taking user inputs and adding into Singleton list.
+ *
  */
 public class AddMedicine extends AppCompatActivity  {
 

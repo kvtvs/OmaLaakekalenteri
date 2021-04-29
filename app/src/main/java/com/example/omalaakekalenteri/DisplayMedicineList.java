@@ -28,6 +28,7 @@ public class DisplayMedicineList extends AppCompatActivity {
     private Button backBtn;
     public final static String SHARED_PREFS = "sharedPrefs";
     public final static String LIST = "list";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +48,13 @@ public class DisplayMedicineList extends AppCompatActivity {
 
         /** The list for medicine **/
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
-        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
-        ));
+        if (MedicineList.getInstance().getMedicines() != null){
+            listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
+                    this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
+            ));
+
+        }
+
 
         /** Fetches the data from Intent that is created in AddMedicine.class **/
         Intent intent = getIntent();
@@ -133,6 +138,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
         MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
         if (MedicineList.getInstance().getMedicines() == null) {
+
             Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "empty");
         }
