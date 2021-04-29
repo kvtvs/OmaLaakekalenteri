@@ -71,28 +71,31 @@ public class DisplayDate extends AppCompatActivity {
 
         medicines = new ArrayList<>();
         //going through the list and checking the dates
-        for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
-            Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String chosenDateInString = sdf.format(chosenDate);
-            String beforeInString = sdf.format(medDate);
-            Log.d(TAG, chosenDateInString);
-            Log.d(TAG, beforeInString);
-            sdf.format(medDate);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(medDate);
-            cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
-            Date resultDate = new Date(cal.getTimeInMillis());
+        if (MedicineList.getInstance().getMedicines() != null) {
+            for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
+                Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String chosenDateInString = sdf.format(chosenDate);
+                String beforeInString = sdf.format(medDate);
+                Log.d(TAG, chosenDateInString);
+                Log.d(TAG, beforeInString);
+                sdf.format(medDate);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(medDate);
+                cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
+                Date resultDate = new Date(cal.getTimeInMillis());
 
 
-            //adding medicines to listview list
-            if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
-                medicines.add(MedicineList.getInstance().getMedicines().get(i));
-            }
-            if (chosenDateInString.equals(beforeInString)){
-                medicines.add(MedicineList.getInstance().getMedicines().get(i));
+                //adding medicines to listview list
+                if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
+                    medicines.add(MedicineList.getInstance().getMedicines().get(i));
+                }
+                if (chosenDateInString.equals(beforeInString)){
+                    medicines.add(MedicineList.getInstance().getMedicines().get(i));
+                }
             }
         }
+
         //listview for selected date's medicines
         ListView listViewDaysMedicines = findViewById(R.id.listViewDaysMedicines);
         listViewDaysMedicines.setAdapter(new ArrayAdapter<Medicine>(
