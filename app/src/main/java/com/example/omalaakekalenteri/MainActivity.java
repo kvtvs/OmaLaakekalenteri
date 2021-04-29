@@ -1,4 +1,4 @@
-package com.example.omalaakekalenteri;
+ package com.example.omalaakekalenteri;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
