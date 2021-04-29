@@ -1,24 +1,28 @@
 package com.example.omalaakekalenteri;
 
+import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.DialogFragment;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Kata Sara-aho, Mikko Räikkönen, Mikael Alakari
  */
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity /*implements Serializable*/ implements TimePickerDialog.OnTimeSetListener {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
-    private Button calendarButton, medicineListButton, notificationTestButton, takenButton, notTakenButton;
+    private Button calendarButton, medicineListButton, clockButton;
     private NotificationManagerCompat notificationManager;
 
 
@@ -46,25 +50,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-        takenButton = (Button) findViewById(R.id.takenButton);
-        takenButton.setOnClickListener(new View.OnClickListener() {
+        clockButton = (Button) findViewById(R.id.clockButton);
+        clockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
-
-        notTakenButton = (Button) findViewById(R.id.notTakenButton);
-        notTakenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
         notificationManager = NotificationManagerCompat.from(this);
-
     }
 
 
@@ -108,5 +103,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         startActivity(intent);
     }
 
-
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
+        clockTextView.setText("Muistutus on asetettu " + hourOfDay + ":" + minute);
+    }
 }

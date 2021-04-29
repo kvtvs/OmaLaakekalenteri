@@ -38,18 +38,15 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        String message = "LÄÄKKEET";
-        Intent broadcastIntent = new Intent(this, AlertReceiver.class);
-        broadcastIntent.putExtra("toastMessage", message);
+        Intent activityIntent = new Intent (this, DisplayMedicineList.class);
+        PendingIntent moveIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
 
-        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("OmaLääkekalenteri")
                 .setContentText("Muista ottaa lääkkeet!")
                 .setAutoCancel(true)
 
-                .addAction(R.mipmap.ic_launcher, "Otin lääkkeet", actionIntent)
-                .addAction(R.mipmap.ic_launcher, "En ottanut lääkkeitäni", actionIntent)
+                .addAction(R.mipmap.ic_launcher, "En ottanut lääkkeitäni", moveIntent)
                 .setSmallIcon(R.drawable.ic_omalaakekalenteri);
     }
 }
