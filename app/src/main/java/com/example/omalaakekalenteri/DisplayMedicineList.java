@@ -48,7 +48,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         /** The list for medicine **/
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, R.layout.medicine_item_layout, MedicineList.getInstance().getMedicines()
+                this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
         ));
 
         /** Fetches the data from Intent that is created in AddMedicine.class **/
@@ -65,9 +65,6 @@ public class DisplayMedicineList extends AppCompatActivity {
             Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage, pieces);
             MedicineList.getInstance().addMedicine(medicine);
         }
-
-
-
 
 
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {

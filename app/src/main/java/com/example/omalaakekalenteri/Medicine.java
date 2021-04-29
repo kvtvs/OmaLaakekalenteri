@@ -114,6 +114,6 @@ public class Medicine {
 
     @Override
     public String toString() {
-        return name;
+        return name.toUpperCase() + " " + dosageMg + "mg";
     }
 }

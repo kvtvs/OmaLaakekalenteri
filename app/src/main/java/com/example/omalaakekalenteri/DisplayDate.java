@@ -2,8 +2,11 @@ package com.example.omalaakekalenteri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,6 +63,11 @@ public class DisplayDate extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        if (day != 0) {
+            textViewDate.setText(day + "." + month + "." + year);
+        } else {
+            textViewDate.setText(todayDay + "." + todayMonth + "." + todayYear);
+        }
 
         medicines = new ArrayList<>();
         //going through the list and checking the dates
@@ -85,18 +93,32 @@ public class DisplayDate extends AppCompatActivity {
                 medicines.add(MedicineList.getInstance().getMedicines().get(i));
             }
         }
-        ListView listViewMedicines = findViewById(R.id.listViewDaysMedicines);
-        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
+        //listview for selected date's medicines
+        ListView listViewDaysMedicines = findViewById(R.id.listViewDaysMedicines);
+        listViewDaysMedicines.setAdapter(new ArrayAdapter<Medicine>(
                 this, android.R.layout.simple_list_item_1, medicines
         ));
 
-        if (day != 0) {
-            textViewDate.setText(day + "." + month + "." + year);
-        } else {
-            textViewDate.setText(todayDay + "." + todayMonth + "." + todayYear);
-        }
+        listViewDaysMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Log.d(TAG, "onItemClick(" + i + ")");
+                Medicine medicine = MedicineList.getInstance().getMedicine(i);
 
+                String name = medicine.getName();
+                String dosage = Integer.toString(medicine.getDosageMg());
+                String timesADay = Integer.toString(medicine.getTimesADay());
 
+                Bundle medicineInfo = new Bundle();
+                medicineInfo.putString("name", name);
+                medicineInfo.putString("dosage", dosage);
+                medicineInfo.putString("timesADay", timesADay);
+
+                Intent intent = new Intent(DisplayDate.this, DisplayDateMedicineInfo.class);
+                intent.putExtras(medicineInfo);
+                startActivity(intent);
+            }
+        });
 
     }
 }
