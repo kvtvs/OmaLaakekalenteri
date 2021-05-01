@@ -26,14 +26,27 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="26dp"
-        android:text="Aseta muistutus"
+        android:text="@string/aseta_muistutus"
         app:backgroundTint="#34CFA0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calanderButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.018" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:text="@string/hylk_muistutus"
+        app:backgroundTint="#34CFA0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clockButton"
+        app:layout_constraintVertical_bias="0.241" />
 
     <Button
         android:id="@+id/buttonLaakelista"
@@ -71,7 +84,9 @@
         android:text="@string/muistutusta_ei_ole_asetettu"
         app:layout_constraintBottom_toTopOf="@+id/buttonLaakelista"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeader"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

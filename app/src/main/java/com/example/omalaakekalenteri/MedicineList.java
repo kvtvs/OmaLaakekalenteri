@@ -31,7 +31,6 @@ public class MedicineList {
     /** Add list of medicines to singleton **/
     public void addMedicine(Medicine medicine){
         medicines.add(medicine);
-
     }
 
     /** Get the medicine list **/

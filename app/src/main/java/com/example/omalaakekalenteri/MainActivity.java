@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
@@ -26,12 +25,10 @@ import java.util.Calendar;
  *
  * @author Kata Sara-aho, Mikko Räikkönen, Mikael Alakari
  */
-public class MainActivity extends AppCompatActivity /*implements Serializable*/ implements TimePickerDialog.OnTimeSetListener {
+public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
-    private Button calendarButton, medicineListButton, clockButton;
-    private NotificationManagerCompat notificationManager;
-
+    private Button calendarButton, medicineListButton, clockButton, cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity /*implements Serializable*/ 
             }
         });
 
-        /** Button for calendar activity **/
+        /** Button for calendar activity */
         calendarButton = (Button) findViewById(R.id.calanderButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +54,7 @@ public class MainActivity extends AppCompatActivity /*implements Serializable*/ 
             }
         });
 
+        /** Button for opening the timepicker */
         clockButton = (Button) findViewById(R.id.clockButton);
         clockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +64,14 @@ public class MainActivity extends AppCompatActivity /*implements Serializable*/ 
             }
         });
 
-        notificationManager = NotificationManagerCompat.from(this);
+        /** Button for canceling the notification */
+        cancelButton = (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelAlarm();
+            }
+        });
     }
 
 
@@ -118,31 +123,51 @@ public class MainActivity extends AppCompatActivity /*implements Serializable*/ 
         startActivity(intent);
     }
 
+    /**
+     * This method will start the notification
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
+        clockTextView.setText("Muistutus on asetettu " + hourOfDay + ":" + minute);
+
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
-        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
-        clockTextView.setText("Muistutus on asetettu " + hourOfDay + ":" + minute);
 
         startAlarm(c);
     }
 
+    /**
+     * Method for creating the notification
+     */
     private void startAlarm(Calendar c){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent alertIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
 
         if(c.before(Calendar.getInstance())){
-            c.add(Calendar.DATE, 1);
+                c.add(Calendar.DATE, 1);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), alertIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
         }
+    }
 
+    /**
+     * this method will cancel the alarm
+     */
+    @SuppressLint("SetTextI18n")
+    private void cancelAlarm(){
+        AlarmManager cancelManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent cancelIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        cancelManager.cancel(cancelIntent);
+        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
+        clockTextView.setText("Muistutus on poistettu");
     }
 }
