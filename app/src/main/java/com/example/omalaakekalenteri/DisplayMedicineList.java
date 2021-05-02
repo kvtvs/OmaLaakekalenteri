@@ -136,12 +136,15 @@ public class DisplayMedicineList extends AppCompatActivity {
         String json = sharedPreferences.getString(LIST, null);
         Log.d(TAG, "load: " +json);
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
-        MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
-        if (MedicineList.getInstance().getMedicines() == null) {
+        if (json != null) {
+            MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
+            if (MedicineList.getInstance().getMedicines() == null) {
 
-            Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "empty");
+                Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "empty");
+            }
         }
+
     }
 
     @Override
