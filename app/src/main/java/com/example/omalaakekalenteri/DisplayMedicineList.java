@@ -35,7 +35,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         setContentView(R.layout.activity_display_medicine_list);
 
         /** Loads all the data that has been put to medicine list **/
-        saveData();
+
         loadData();
 
         /** Button and method for going back to MainActivity **/
@@ -125,6 +125,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(MedicineList.getInstance().getMedicines());
+        Log.d(TAG, "save: "+ json);
         editor.putString(LIST, json);
         editor.apply();
     }
@@ -133,6 +134,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(LIST, null);
+        Log.d(TAG, "load: " +json);
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
         MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
         if (MedicineList.getInstance().getMedicines() == null) {
