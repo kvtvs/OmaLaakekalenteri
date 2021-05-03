@@ -1,29 +1,28 @@
  package com.example.omalaakekalenteri;
 
  import android.annotation.SuppressLint;
- import android.app.AlarmManager;
- import android.app.PendingIntent;
- import android.app.TimePickerDialog;
- import android.content.Context;
- import android.content.Intent;
- import android.os.Build;
- import android.os.Bundle;
- import android.util.Log;
- import android.view.View;
- import android.widget.ArrayAdapter;
- import android.widget.Button;
- import android.widget.TextView;
- import android.widget.TimePicker;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
- import androidx.appcompat.app.AppCompatActivity;
- import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
- import java.text.DateFormat;
- import java.util.ArrayList;
- import java.util.Calendar;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
- import static android.app.AlarmManager.INTERVAL_DAY;
- import static android.app.AlarmManager.RTC_WAKEUP;
+import static android.app.AlarmManager.INTERVAL_DAY;
 
  /**
  * MainActivity
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * This method will start the notification and set the text to when the notification will play
+     * Method for getting values from timepicker
      */
 
     @SuppressLint("SetTextI18n")
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * Method for creating the notification
+     * This method will create the notification
      */
     private void startAlarm(Calendar c){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                alarmManager.setRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY, alarmIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY, alarmIntent);
         }
     }
 

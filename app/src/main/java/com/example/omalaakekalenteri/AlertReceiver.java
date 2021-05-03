@@ -7,7 +7,7 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 
 /**
- * Class will receive the notification
+ * this Class will receive the notification
  * @author Mikko Räikkönen
  *
  */

@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 /**
- * Class for creating the timepicker
+ * Class for building timepicker
  * @author Mikko Räikkönen
  *
  */

@@ -13,7 +13,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 /**
- * Class for making and customaizing notification channels
+ * Class for making and customizing notifications
  * @author Mikko Räikkönen
  *
  */
