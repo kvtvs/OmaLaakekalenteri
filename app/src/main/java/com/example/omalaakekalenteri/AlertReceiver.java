@@ -7,8 +7,9 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 
 /**
- * @author Mikko Räikkönen
  * Class will receive the notification
+ * @author Mikko Räikkönen
+ *
  */
 
 public class AlertReceiver extends BroadcastReceiver {

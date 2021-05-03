@@ -1,7 +1,5 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,18 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 /**
- * @author Mikael Alakari
  * From CalendarView Displays Chosen Day's Medicine info in listView
+ * @author Mikael Alakari
+ *
  */
 public class DisplayDate extends AppCompatActivity {
     private int year, month, day, todayDay, todayMonth, todayYear;

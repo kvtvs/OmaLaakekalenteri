@@ -1,6 +1,7 @@
 package com.example.omalaakekalenteri;
 
 /**
+ * Counts the amount of medicine after "I have taken my meds"-button is pressed
  * @author Kata Sara-aho
  *
  */

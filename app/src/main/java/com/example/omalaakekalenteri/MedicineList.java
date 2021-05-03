@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Kata Sara-aho, Mikael Alakari
  * Class that contains singleton list of medicine
+ * @author Kata Sara-aho, Mikael Alakari
+ *
   */
 
 public class MedicineList {

@@ -13,8 +13,9 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 /**
- * @author Mikko Räikkönen
  * Class for making and customaizing notification channels
+ * @author Mikko Räikkönen
+ *
  */
 
 public class NotificationHelper extends ContextWrapper {

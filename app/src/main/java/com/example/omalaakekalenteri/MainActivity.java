@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *
+ * MainActivity
  * @author Kata Sara-aho, Mikko Räikkönen, Mikael Alakari
  */
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {

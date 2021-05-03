@@ -5,6 +5,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Fecthes the data that will be showing in DisplayDateMedicine-activity
+ * @author Mikael Alakari
+ */
+
 public class DisplayDateMedicineInfo extends AppCompatActivity {
     private TextView textViewDateMedName, textViewDateMedTimes;
     @Override

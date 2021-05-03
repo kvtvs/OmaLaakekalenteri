@@ -18,8 +18,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * @author Mikael Alakari, Kata Sara-aho
  * Displays Medicine Info on activity_display_medicine
+ * @author Mikael Alakari, Kata Sara-aho
+ *
  */
 public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";

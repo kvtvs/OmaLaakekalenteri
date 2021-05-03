@@ -11,8 +11,9 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 /**
- * @author Mikko Räikkönen
  * Class for creating the timepicker
+ * @author Mikko Räikkönen
+ *
  */
 
 public class TimePickerFragment extends DialogFragment{

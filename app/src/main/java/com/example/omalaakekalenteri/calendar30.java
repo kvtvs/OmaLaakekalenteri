@@ -9,8 +9,9 @@ import android.widget.CalendarView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 /**
- * @author Mikko Räikkönen, Mikael Alakari
  * Activity class with CalendarView
+ * @author Mikko Räikkönen, Mikael Alakari
+ *
  */
 
 public class calendar30 extends AppCompatActivity {
