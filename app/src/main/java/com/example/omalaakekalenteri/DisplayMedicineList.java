@@ -28,12 +28,14 @@ public class DisplayMedicineList extends AppCompatActivity {
     private Button backBtn;
     public final static String SHARED_PREFS = "sharedPrefs";
     public final static String LIST = "list";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_medicine_list);
 
         /** Loads all the data that has been put to medicine list **/
+
         loadData();
 
         /** Button and method for going back to MainActivity **/
@@ -48,8 +50,9 @@ public class DisplayMedicineList extends AppCompatActivity {
         /** The list for medicine **/
         ListView listViewMedicines = findViewById(R.id.listViewMedicineList);
         listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, R.layout.medicine_item_layout, MedicineList.getInstance().getMedicines()
+                this, android.R.layout.simple_list_item_1, MedicineList.getInstance().getMedicines()
         ));
+
 
         /** Fetches the data from Intent that is created in AddMedicine.class **/
         Intent intent = getIntent();
@@ -65,9 +68,6 @@ public class DisplayMedicineList extends AppCompatActivity {
             Medicine medicine = new Medicine(name, activeIngredient, timesADay, quantity, dosage, pieces);
             MedicineList.getInstance().addMedicine(medicine);
         }
-
-
-
 
 
         listViewMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,6 +125,7 @@ public class DisplayMedicineList extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(MedicineList.getInstance().getMedicines());
+        Log.d(TAG, "save: "+ json);
         editor.putString(LIST, json);
         editor.apply();
     }
@@ -133,12 +134,17 @@ public class DisplayMedicineList extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(LIST, null);
+        Log.d(TAG, "load: " +json);
         Type type = new TypeToken<ArrayList<Medicine>>() {}.getType();
-        MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
-        if (MedicineList.getInstance().getMedicines() == null) {
-            Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "empty");
+        if (json != null) {
+            MedicineList.getInstance().setMedicines(gson.fromJson(json, type));
+            if (MedicineList.getInstance().getMedicines() == null) {
+
+                Toast.makeText(this, "Lääkelista on tyhjä", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "empty");
+            }
         }
+
     }
 
     @Override

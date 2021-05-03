@@ -1,18 +1,17 @@
 package com.example.omalaakekalenteri;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 /**
- * @author Mikko Räikkönen, Mikael Alakari
  * Activity class with CalendarView
+ * @author Mikko Räikkönen, Mikael Alakari
+ *
  */
 
 public class calendar30 extends AppCompatActivity {
@@ -42,7 +41,7 @@ public class calendar30 extends AppCompatActivity {
         calendar30.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                //selected date
+                //etsii painetun päivän datan
                 chosenYear = year;
                 chosenMonth = month + 1;
                 chosenDay = dayOfMonth;
@@ -79,7 +78,7 @@ public class calendar30 extends AppCompatActivity {
         bundle.putInt("year", chosenYear);
         bundle.putInt("month", chosenMonth);
         bundle.putInt("day", chosenDay);
-
+        //Log.d(TAG, "" + chosenDay + " " + chosenMonth + " " + chosenYear);
         intent.putExtras(bundle);
         startActivity(intent);
     }

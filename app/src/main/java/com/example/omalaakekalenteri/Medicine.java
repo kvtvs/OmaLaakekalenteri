@@ -4,8 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * @author Mikael Alakari
  * Medicine class for creating Medicine objects
+ * @author Mikael Alakari
+ *
  */
 public class Medicine {
     private String name;
@@ -18,13 +19,13 @@ public class Medicine {
     private final Date date;
 
     /**
-     *
-     * @param name
-     * @param activeIngredient
-     * @param timesADay
-     * @param quantity
-     * @param dosageMg
-     * @param piecesAtOnce
+     * Constructor for Medicine
+     * @param name name of the Medicine
+     * @param activeIngredient active ingredient in the medicine
+     * @param timesADay how many times a day is the medicine consumed
+     * @param quantity how many units
+     * @param dosageMg dosage in milligrams
+     * @param piecesAtOnce how many units at once
      *
      */
     public Medicine(String name,  String activeIngredient, int timesADay, int quantity, int dosageMg, int piecesAtOnce) {
@@ -34,7 +35,7 @@ public class Medicine {
         this.timesADay = timesADay;
         this.quantity = quantity;
         this.piecesAtOnce = piecesAtOnce;
-        howManyDays = quantity / timesADay;
+        howManyDays = this.quantity / this.timesADay;
         date = Calendar.getInstance().getTime();
 
     }
@@ -93,13 +94,17 @@ public class Medicine {
      */
     public int getPiecesAtOnce(){return piecesAtOnce;}
 
+    /**
+     *
+     * @return the date when the medicine was created
+     */
     public Date getDate(){
         return date;
     }
 
     /**
      * set the quantity of the medicine when the medicine is taken
-     * @param quantity
+     * @param quantity new unit amount to the medicine
      */
     public void setQuantity(int quantity){
         this.quantity = quantity;
@@ -110,6 +115,6 @@ public class Medicine {
 
     @Override
     public String toString() {
-        return name;
+        return name.toUpperCase() + " " + dosageMg + "mg";
     }
 }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Kata Sara-aho, Mikael Alakari
  * Class that contains singleton list of medicine
+ * @author Kata Sara-aho, Mikael Alakari
+ *
   */
 
 public class MedicineList {
@@ -18,15 +19,19 @@ public class MedicineList {
     private MedicineList(){
         medicines = new ArrayList<>();
         //test objects
+        /*
         medicines.add(new Medicine("Burana", "ibuprofeiini", 3, 21, 400, 3));
+
         medicines.add(new Medicine("Panadol", "parasetamoli", 2, 16, 1000, 4));
         medicines.add(new Medicine("TestMed", "test", 1, 2, 10, 1));
 
+
+         */
     }
 
     /** Add list of medicines to singleton **/
     public void addMedicine(Medicine medicine){
-        this.medicines.add(medicine);
+        medicines.add(medicine);
     }
 
     /** Get the medicine list **/

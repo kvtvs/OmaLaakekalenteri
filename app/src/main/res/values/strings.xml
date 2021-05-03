@@ -36,5 +36,11 @@
     <string name="ei_otettu">ei otettu</string>
     <string name="kello">Kello</string>
     <string name="muistutusta_ei_ole_asetettu">Muistutusta ei ole asetettu!</string>
+    <string name="textview_date_med_name">Nimi</string>
+    <string name="textview_date_med_times">Monta kertaa päivässä</string>
+    <string name="p_iv_n_kokonaisl_kem_r">Päivän kokonaislääkemäärä</string>
+    <string name="muistutuksen_asetus">Muistutuksen asetus</string>
+    <string name="aseta_muistutus">Aseta muistutus</string>
+    <string name="hylk_muistutus">Hylkää Muistutus</string>
 
 </resources>

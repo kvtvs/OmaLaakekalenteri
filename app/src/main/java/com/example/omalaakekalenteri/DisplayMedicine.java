@@ -18,8 +18,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * @author Mikael Alakari, Kata Sara-aho
  * Displays Medicine Info on activity_display_medicine
+ * @author Mikael Alakari, Kata Sara-aho
+ *
  */
 public class DisplayMedicine extends AppCompatActivity implements RemoveMedicineDialog.RemoveMedicineDialogListener{
     private final String TAG = "MED_";
@@ -125,7 +126,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
     }
 
     /**
-     * Removes medicine from MedicineList
+     * Removes medicine from MedicineList when OK is clicked
      */
     @Override
     public void onYesClicked() {
@@ -137,6 +138,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         startActivity(intent);
     }
     //SharedPrefs save
+    //changing the list into json string
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -147,6 +149,7 @@ public class DisplayMedicine extends AppCompatActivity implements RemoveMedicine
         editor.apply();
     }
     // SharedPrefs load
+    //changing the json string into a list
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();

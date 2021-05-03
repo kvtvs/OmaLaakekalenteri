@@ -10,6 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+/**
+ * Pop up notification that asks confirmation for removing the medicine
+ * @author Mikael Alakari
+ */
+
 public class RemoveMedicineDialog extends AppCompatDialogFragment {
     private RemoveMedicineDialogListener listener;
     @NonNull

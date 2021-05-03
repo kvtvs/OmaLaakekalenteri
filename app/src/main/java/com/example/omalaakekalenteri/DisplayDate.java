@@ -1,25 +1,27 @@
 package com.example.omalaakekalenteri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 /**
- * @author Mikael Alakari
  * From CalendarView Displays Chosen Day's Medicine info in listView
+ * @author Mikael Alakari
+ *
  */
 public class DisplayDate extends AppCompatActivity {
     private int year, month, day, todayDay, todayMonth, todayYear;
@@ -60,43 +62,65 @@ public class DisplayDate extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        medicines = new ArrayList<>();
-        //going through the list and checking the dates
-        for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
-            Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String chosenDateInString = sdf.format(chosenDate);
-            String beforeInString = sdf.format(medDate);
-            Log.d(TAG, chosenDateInString);
-            Log.d(TAG, beforeInString);
-            sdf.format(medDate);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(medDate);
-            cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
-            Date resultDate = new Date(cal.getTimeInMillis());
-
-
-            //adding medicines to listview list
-            if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
-                medicines.add(MedicineList.getInstance().getMedicines().get(i));
-            }
-            if (chosenDateInString.equals(beforeInString)){
-                medicines.add(MedicineList.getInstance().getMedicines().get(i));
-            }
-        }
-        ListView listViewMedicines = findViewById(R.id.listViewDaysMedicines);
-        listViewMedicines.setAdapter(new ArrayAdapter<Medicine>(
-                this, android.R.layout.simple_list_item_1, medicines
-        ));
-
         if (day != 0) {
             textViewDate.setText(day + "." + month + "." + year);
         } else {
             textViewDate.setText(todayDay + "." + todayMonth + "." + todayYear);
         }
 
+        medicines = new ArrayList<>();
+        //going through the list and checking the dates
+        if (MedicineList.getInstance().getMedicines() != null) {
+            for (int i = 0; i < MedicineList.getInstance().getMedicines().size(); i++){
+                Date medDate = MedicineList.getInstance().getMedicines().get(i).getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                String chosenDateInString = sdf.format(chosenDate);
+                String beforeInString = sdf.format(medDate);
+                Log.d(TAG, chosenDateInString);
+                Log.d(TAG, beforeInString);
+                sdf.format(medDate);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(medDate);
+                cal.add(Calendar.DATE, MedicineList.getInstance().getMedicines().get(i).getHowManyDays() -1);
+                Date resultDate = new Date(cal.getTimeInMillis());
 
+
+                //adding medicines to listview list
+                if (chosenDate.compareTo(resultDate) < 0 && medDate.compareTo(chosenDate) < 0){
+                    medicines.add(MedicineList.getInstance().getMedicines().get(i));
+                }
+                if (chosenDateInString.equals(beforeInString)){
+                    medicines.add(MedicineList.getInstance().getMedicines().get(i));
+                }
+            }
+        }
+
+        //listview for selected date's medicines
+        ListView listViewDaysMedicines = findViewById(R.id.listViewDaysMedicines);
+        listViewDaysMedicines.setAdapter(new ArrayAdapter<Medicine>(
+                this, android.R.layout.simple_list_item_1, medicines
+        ));
+
+        listViewDaysMedicines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Log.d(TAG, "onItemClick(" + i + ")");
+                Medicine medicine = MedicineList.getInstance().getMedicine(i);
+
+                String name = medicine.getName();
+                String dosage = Integer.toString(medicine.getDosageMg());
+                String timesADay = Integer.toString(medicine.getTimesADay());
+
+                Bundle medicineInfo = new Bundle();
+                medicineInfo.putString("name", name);
+                medicineInfo.putString("dosage", dosage);
+                medicineInfo.putString("timesADay", timesADay);
+
+                Intent intent = new Intent(DisplayDate.this, DisplayDateMedicineInfo.class);
+                intent.putExtras(medicineInfo);
+                startActivity(intent);
+            }
+        });
 
     }
 }
