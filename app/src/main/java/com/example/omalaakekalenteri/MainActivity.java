@@ -1,27 +1,31 @@
  package com.example.omalaakekalenteri;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.TimePicker;
+ import android.annotation.SuppressLint;
+ import android.app.AlarmManager;
+ import android.app.PendingIntent;
+ import android.app.TimePickerDialog;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.os.Build;
+ import android.os.Bundle;
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.ArrayAdapter;
+ import android.widget.Button;
+ import android.widget.TextView;
+ import android.widget.TimePicker;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.fragment.app.DialogFragment;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+ import java.text.DateFormat;
+ import java.util.ArrayList;
+ import java.util.Calendar;
 
-/**
+ import static android.app.AlarmManager.INTERVAL_DAY;
+ import static android.app.AlarmManager.RTC_WAKEUP;
+
+ /**
  * MainActivity
  * @author Kata Sara-aho, Mikko Räikkönen, Mikael Alakari
  */
@@ -29,12 +33,17 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private ArrayList<Medicine> medicines;
     ArrayAdapter adapter;
     private Button calendarButton, medicineListButton, clockButton, cancelButton;
+    private boolean setText = false;
+    private boolean cancelText = false;
+    private TextView clockTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        clockTextView = findViewById(R.id.clockTextView);
+        Calendar c = Calendar.getInstance();
 
         /** Button for medicine list activity **/
         medicineListButton = (Button) findViewById(R.id.buttonLaakelista);
@@ -59,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         clockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cancelText = false;
+                setText = true;
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
@@ -69,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelAlarm();
+                setText = false;
+                cancelText = true;
+                cancelAlarm(c);
             }
         });
     }
@@ -124,18 +137,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * This method will start the notification
+     * This method will start the notification and set the text to when the notification will play
      */
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
-        clockTextView.setText("Muistutus on asetettu " + hourOfDay + ":" + minute);
-
         Calendar c = Calendar.getInstance();
+
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
+
+        updateText(c);
 
         startAlarm(c);
     }
@@ -153,21 +167,37 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                alarmManager.setRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY, alarmIntent);
         }
     }
 
     /**
-     * this method will cancel the alarm
+     * this method will cancel the alarm and change the text to notification is canceled
      */
     @SuppressLint("SetTextI18n")
-    private void cancelAlarm(){
+    private void cancelAlarm(Calendar c){
         AlarmManager cancelManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent cancelIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
 
+        updateText(c);
+
         cancelManager.cancel(cancelIntent);
-        TextView clockTextView = (TextView) findViewById(R.id.clockTextView);
-        clockTextView.setText("Muistutus on poistettu");
+    }
+
+     /**
+      * this method will update the text on main activity depending on user input
+      */
+    @SuppressLint("SetTextI18n")
+    private void updateText(Calendar c){
+        String clockText;
+        if (setText){
+            clockText = "Muistutus on asetettu joka päivälle kello: ";
+            clockText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+            clockTextView.setText(clockText);
+        }
+        else if(cancelText){
+            clockTextView.setText("Muistutus on hylätty");
+        }
     }
 }
