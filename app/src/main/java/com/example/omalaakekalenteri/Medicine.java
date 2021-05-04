@@ -36,6 +36,9 @@ public class Medicine {
         this.quantity = quantity;
         this.piecesAtOnce = piecesAtOnce;
         howManyDays = this.quantity / this.timesADay;
+        if (howManyDays < 1) {
+            howManyDays = 1;
+        }
         date = Calendar.getInstance().getTime();
 
     }
